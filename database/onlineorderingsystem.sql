@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2023 at 06:10 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Oct 06, 2023 at 06:43 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `crud_db`
+-- Database: `onlineorderingsystem`
 --
 
 -- --------------------------------------------------------
@@ -193,6 +193,7 @@ CREATE TABLE `tbluser` (
   `photo` varchar(100) NOT NULL,
   `Firstname` char(100) NOT NULL,
   `Lastname` char(100) NOT NULL,
+  `Surname` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `HouseNo` int(11) NOT NULL,
@@ -209,14 +210,16 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`userID`, `photo`, `Firstname`, `Lastname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES
-(1, 'id picture.jpg', 'Jerico', 'Daag', 'daageco@gmail.com', '123456', 4, 'Sunflower Drive', 'Sto Domingo', 'Angeles City', 'Pampanga', '+639270416057', 'offline.png', 'Admin'),
-(2, 'andrei.jpg', 'Andrei', 'Agbisit', 'agbisit.andrei@auf.edu.ph', '123456', 52, ' Stones ', 'Friendship ', 'Angeles City ', 'Pampanga ', '+639512342412', 'offline.png', 'Admin'),
-(3, 'derick.jpg', 'Derick', 'Pangilinan', 'pangilinan.derick@auf.edu.ph', '123456', 86, ' Jollibee ', 'Central Town  ', 'Angeles City  ', 'Pampanga  ', '+639513431242', 'offline.png', 'User'),
-(4, 'cristan.jpg', 'Cristan', 'Nuguid', 'nuguid.cristan@auf.edu.ph', '123456', 34, ' Kensington Road ', 'Balibago', 'Angeles City ', 'Pampanga ', '+639123512452', 'offline.png', 'User'),
-(5, 'tyler durden.jpg', 'azi', 'boy', 'testuser@gmail.com', '12345', 426, ' 1231 ', '31 ', 'Angeles City ', 'Pampanga ', '+634324112341', 'offline.png', 'User'),
-(6, 'default.png', 'Tyler', 'Durden', 'tylerdurden@gmail.com', '12345', 87, ' Sampaguita ', 'Sto Tomas ', 'Angeles ', 'Pampanga ', '+639235213421', 'offline.png', 'User'),
-(19, 'psj.jpg', 'Jerico', 'Daag', 'jericodaag@gmail.com', '123456', 426, ' sunflower ', 'dr ', 'Angeles ', 'Pampanga ', '+639234235231', 'offline.png', 'User');
+INSERT INTO `tbluser` (`userID`, `photo`, `Firstname`, `Lastname`, `Surname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES
+(1, 'id picture.jpg', 'Jerico', 'Daag', '', 'daageco@gmail.com', '123456', 4, 'Sunflower Drive', 'Sto Domingo', 'Angeles City', 'Pampanga', '+639270416057', 'offline.png', 'Admin'),
+(2, 'andrei.jpg', 'Andrei', 'Agbisit', '', 'agbisit.andrei@auf.edu.ph', '123456', 52, ' Stones ', 'Friendship ', 'Angeles City ', 'Pampanga ', '+639512342412', 'offline.png', 'Admin'),
+(3, 'derick.jpg', 'Derick', 'Pangilinan', '', 'pangilinan.derick@auf.edu.ph', '123456', 86, ' Jollibee ', 'Central Town  ', 'Angeles City  ', 'Pampanga  ', '+639513431242', 'offline.png', 'User'),
+(4, 'cristan.jpg', 'Cristan', 'Nuguid', '', 'nuguid.cristan@auf.edu.ph', '123456', 34, ' Kensington Road ', 'Balibago', 'Angeles City ', 'Pampanga ', '+639123512452', 'offline.png', 'User'),
+(5, 'tyler durden.jpg', 'azi', 'boy', '', 'testuser@gmail.com', '12345', 426, ' 1231 ', '31 ', 'Angeles City ', 'Pampanga ', '+634324112341', 'offline.png', 'User'),
+(6, 'default.png', 'Tyler', 'Durden', '', 'tylerdurden@gmail.com', '12345', 87, ' Sampaguita ', 'Sto Tomas ', 'Angeles ', 'Pampanga ', '+639235213421', 'offline.png', 'User'),
+(19, 'psj.jpg', 'Jerico', 'Daag', '', 'jericodaag@gmail.com', '123456', 426, ' sunflower ', 'dr ', 'Angeles ', 'Pampanga ', '+639234235231', 'offline.png', 'User'),
+(20, 'default.png', 'Khoo', 'Pin', '', 'khoochunpin@gmail.com', '123456', 20, ' Lorong Lasksamana 5B, Taman Kintaman ', '41200 ', 'Klang ', 'selangor ', '+631110060970', 'offline.png', 'User'),
+(30, 'default.png', 'Khoo', 'Pin', 'Khoo_ben', 'khoochunping@gmail.com', '123456', 0, '', '', '', '', '', 'online.png', 'User');
 
 --
 -- Indexes for dumped tables
@@ -254,16 +257,15 @@ ALTER TABLE `tblinventory`
 -- AUTO_INCREMENT for table `tbltransaction`
 --
 ALTER TABLE `tbltransaction`
-  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
