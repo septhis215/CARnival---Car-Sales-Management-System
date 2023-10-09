@@ -1,5 +1,5 @@
-# MSP-Car-Sales Management-System
-A simple MSP project created with PHP.
+# CRUD-Online-Shopping
+A simple CRUD project created with PHP.
 ## Software used:
 * VS Code
 * XAMPP
