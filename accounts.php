@@ -9,6 +9,7 @@ $con=connect();
 $id=0;
 $fname = "";
 $lname = "";
+$surname = "";
 $email = "";
 $password = "";
 $house = "";
@@ -22,7 +23,7 @@ $update=false;
 $User=false;
 $signup=false;
 
-$mysqli=new mysqli('localhost', 'root', '','crud_db') or die ($mysqli_error($mysqli));
+$mysqli=new mysqli('localhost', 'root', '','onlineorderingsystem') or die ($mysqli_error($mysqli));
     
 $sql = "SELECT * FROM tbluser WHERE `Access`='User'";
 $users = $con->query($sql) or die ($con->error);
@@ -47,7 +48,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
     //SEARCH
     if(isset($_POST['searchacc'])){ 
         $searchkey=$_POST['searchacc'];
-        $sql = "SELECT * FROM tbluser WHERE `userID` like '%$searchkey%' OR `Firstname` LIKE '%$searchkey%' OR `Lastname` like '%$searchkey%' OR `email` like '%$searchkey%' OR `Access` like '%$searchkey%'";
+        $sql = "SELECT * FROM tbluser WHERE `userID` like '%$searchkey%' OR `Firstname` LIKE '%$searchkey%' OR `Lastname` LIKE '%$searchkey%' OR `Surname` like '%$searchkey%' OR `email` like '%$searchkey%' OR `Access` like '%$searchkey%'";
         $all = $con->query($sql) or die ($con->error);
     }
     else{
@@ -59,6 +60,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
                     
         $fname = $_POST['firstname'];
         $lname = $_POST['lastname'];
+        $surname = $_POST['surname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $house = $_POST['house'];
@@ -73,7 +75,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
         $users = $con->query($sql) or die ($con->error);
         $row = $users->fetch_assoc();
 
-        if($fname==""||$lname==""||$email==""||$password==""||$house==""||$city==""||$province==""||$city==""||$brgy==""||$phone==""){
+        if($fname==""||$lname==""||$surname==""||$email==""||$password==""||$house==""||$city==""||$province==""||$city==""||$brgy==""||$phone==""){
             $_SESSION['message'] = "
             <script>
                 $(function() {
@@ -136,7 +138,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
                 });
             </script>";
 
-            $sql= "INSERT INTO `tbluser`(`userID`, `photo`, `Firstname`, `Lastname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES ('', 'default.png', '$fname','$lname','$email','$password', '$house',' $street ','$brgy ','$city ','$province ', '+63$phone', 'offline.png', '$access')";
+            $sql= "INSERT INTO `tbluser`(`userID`, `photo`, `Firstname`, `Lastname`, `Surname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES ('', 'default.png', '$fname','$lname','$surname','$email','$password', '$house',' $street ','$brgy ','$city ','$province ', '+63$phone', 'offline.png', '$access')";
             $con->query($sql) or die ($con->error);
             echo header("Refresh:4; url=accounts.php");
         }
@@ -227,6 +229,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
         $id = $_POST['id'];
         $fname = $_POST['firstname'];
         $lname = $_POST['lastname'];
+        $surname = $_POST['surname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $house = $_POST['house'];
@@ -257,7 +260,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Admin")){
             });
         </script>";
 
-        $sql= "UPDATE tbluser SET `Firstname`='$fname', `Lastname`='$lname', `email`='$email', `Password`='$password', `HouseNo`='$house', `Street`=' $street ', `Brgy`='$brgy ', `City`='$city ', `Province`='$province ', `phone`='$phone', `Access`='$access' WHERE `userID`='$id'";
+        $sql= "UPDATE tbluser SET `Firstname`='$fname', `Lastname`='$lname', `Surname`='$surname', `email`='$email', `Password`='$password', `HouseNo`='$house', `Street`=' $street ', `Brgy`='$brgy ', `City`='$city ', `Province`='$province ', `phone`='$phone', `Access`='$access' WHERE `userID`='$id'";
         $con->query($sql) or die ($con->error);
     
         echo header("Refresh:4; url=accounts.php");
@@ -404,7 +407,7 @@ else if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="Supervisor")){
     //SEARCH
     if(isset($_POST['searchacc'])){ 
         $searchkey=$_POST['searchacc'];
-        $sql = "SELECT * FROM tbluser WHERE `userID` like '%$searchkey%' OR `Firstname` LIKE '%$searchkey%' OR `Lastname` like '%$searchkey%' OR `email` like '%$searchkey%' OR `Access` like '%$searchkey%'";
+        $sql = "SELECT * FROM tbluser WHERE `userID` like '%$searchkey%' OR `Firstname` LIKE '%$searchkey%' OR `Lastname` LIKE '%$searchkey%' OR `Surname` like '%$searchkey%' OR `email` like '%$searchkey%' OR `Access` like '%$searchkey%'";
         $all = $con->query($sql) or die ($con->error);
     }
     else {
@@ -559,7 +562,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | User Accounts</title>
+    <title>CARnival | User Accounts</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -587,7 +590,7 @@ else{
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid ">
-            <a href="accounts.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="accounts.php" class="navbar-brand logo-container"><div class="logo"><span>CAR</span>nival</div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -674,8 +677,8 @@ else{
                                         <input type="text" name="firstname" id="accountsinputFirstname" class="form-control" placeholder="Firstname" value="<?php echo $fname?>">
                                     </div>
                                     <div class="form-group col-sm-12 col-md-5">
-                                        <label for="inputLastname">Lastname: </label>
-                                        <input type="text" name="lastname" id="accountsinputLastname" class="form-control" placeholder="Lastname" value="<?php echo $lname?>">
+                                        <label for="inputSurname">Surname: </label>
+                                        <input type="text" name="surname" id="accountsinputSurname" class="form-control" placeholder="Surname" value="<?php echo $surname?>">
                                     </div>
                                     <div class="form-group col-sm-12 col-md-2">
                                         <label for="access">Account Type:</label>
@@ -776,6 +779,7 @@ else{
                                     <th scope="col">Avatar</th>
                                     <th scope="col">Firstname</th>
                                     <th scope="col">Lastname</th>
+                                    <th scope="col">Surname</th>
                                     <th scope="col">Email Address</th>
                                     <th scope="col">Password</th>
                                     <th scope="col">Address</th>
@@ -792,6 +796,7 @@ else{
                                         <td><img src="<?php echo 'images/avatars/'.$row['photo']?>"width="90" height="90"></td>
                                         <td><?php echo $row['Firstname'];?></td>
                                         <td><?php echo $row['Lastname'];?></td>
+                                        <td><?php echo $row['Surname'];?></td>
                                         <td><?php echo $row['email'];?></td>
                                         <td>
                                             <?php if(($row['Access']=="Admin")||($row['Access']=="Supervisor")){?>
@@ -880,6 +885,7 @@ else{
                                     <th scope="col">Avatar</th>
                                     <th scope="col">Firstname</th>
                                     <th scope="col">Lastname</th>
+                                    <th scope="col">Surname</th>
                                     <th scope="col">Email Address</th>
                                     <!-- <th scope="col">Password</th> -->
                                     <th scope="col">Address</th>
@@ -895,6 +901,7 @@ else{
                                         <td><img src="<?php echo 'images/avatars/'.$row['photo']?>"width="90" height="90"></td>
                                         <td><?php echo $row['Firstname'];?></td>
                                         <td><?php echo $row['Lastname'];?></td>
+                                        <td><?php echo $row['Surname'];?></td>
                                         <td><?php echo $row['email'];?></td>
                                         <!-- <td><?php echo $row['Password']=str_repeat("*", strlen($row['Password']));?></td> -->
                                         <td><?php echo $row['HouseNo'].$row['Street'].$row['Brgy'].$row['City'].$row['Province'];?></td>

@@ -180,7 +180,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | <?php echo $_SESSION['firstname']." ".$_SESSION['lastname'];?></title>
+    <title>CARnival | <?php echo $_SESSION['surname']?></title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -202,7 +202,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -215,21 +215,21 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
                         <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <div class="dropdown-content">
+                        <!-- <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="men-formal-attire.php">Classic Cars</a>
-                        </div>
+                        </div> -->
                     </li>
                 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Car Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li>
+                    </li> -->
                 
                     <li class="nav-item dropdown">
                         <a href="about.php" class="nav-link dropbtn">About</a>
@@ -280,7 +280,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
                         <?php }?>
 
                     <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></a>
+                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
                     </li>
                     <?php } else { ?>
                         <li class="nav-item">
@@ -325,7 +325,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
                </h1>
                     <div class="row ">
                         <div class="col-12">
-                            <h1><?php echo $_SESSION['firstname']." ".$_SESSION['lastname'];?>
+                            <h1><?php echo $_SESSION['surname'] ?>
                             
                                 <h6 class="text-left">&nbsp<?php echo $_SESSION['UserLogIn']?></h6>
                                 <h5 class="text-left">&nbspID: #<?php echo $_SESSION['ID']?></h5>
@@ -394,17 +394,20 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     </div>
             <?php } ?>
 
+
+
     <!-- FOOTER -->
     <footer>
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
 
@@ -431,7 +434,8 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
             <hr>
             <div class="row text-center">
                 <div class="col-12">
-                    <p>Copyright &copy; 2021 | All Rights Reserved</p>
+                   <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>

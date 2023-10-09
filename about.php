@@ -127,7 +127,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | About</title>
+    <title>CARnival | About Us</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -141,13 +141,13 @@ else{
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.js"></script>
 </head>
-<body style="background-color:black;">
+<body style="background-color:gold;">
 
 
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -157,21 +157,21 @@ else{
                         <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                             <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <div class="dropdown-content">
+                        <!-- <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="jdm-classics.php">Classic Cars</a>
-                        </div>
+                        </div> -->
                     </li>
                 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="merchandise.php" class="nav-link dropbtn" id=women>Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li>
+                    </li> -->
                 
                         <a href="about.php" class="nav-link dropbtn">About</a>
                         <div class="dropdown-content">
@@ -182,21 +182,21 @@ else{
                         <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                             <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <div class="dropdown-content">
+                        <!-- <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="jdm-classics.php">Classic Cars</a>
-                        </div>
+                        </div> -->
                     </li>
                 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li>
+                    </li> -->
                 
                         <a href="about.php" class="nav-link dropbtn">About</a>
                         <div class="dropdown-content">
@@ -240,7 +240,7 @@ else{
                         <?php }?>
 
                     <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></a>
+                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
                     </li>
                     <?php } else { ?>
                         <li class="nav-item">
@@ -259,7 +259,7 @@ else{
     <!-- BANNER ABOUT -->
     <div class="inline">
             <div class="col-12 about banner-image-container" style="color:white;">
-                <h4 class="display-4">Car Categories</h4>
+                <h4 class="display-4">About Us</h4>
                 <form action=home.php method=get>
                 <div class="search-boxkids">
                     <input class="search-input" name=searchitem  value="" type="text" placeholder="Search something..">
@@ -318,7 +318,7 @@ else{
         .mission {
             font-family:"A4speed";
             font-size: 24px;
-            color: #fff;
+            color: black;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -331,7 +331,7 @@ else{
         .why-choose {
             font-family:"A4speed";
             font-size: 24px;
-            color: #fff;
+            color: black;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -349,14 +349,14 @@ else{
             width: 400px;
             padding: 20px;
             margin: 10px;
-            background-color: #1a1a1a;
+            background-color: orange;
             border-radius: 10px;
             text-align: center;
         }
         .why-choose-item p {
             font-family:"Cafe";
             font-size: 18px;
-            color: #fff;
+            color: black;
             margin: 0;
         }
         .start-journey {
@@ -376,31 +376,31 @@ else{
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to JDMania!</h1>
-        <p class="subtitle">Unleash Your Passion for JDM Cars</p>
-        <p class="description">At JDMania, we live and breathe JDM (Japanese Domestic Market) cars. We are more than just a dealership; we are a gateway to a world where performance, style, and heritage intertwine to create automotive masterpieces.</p>
+        <h1>Welcome to CARnival!</h1>
+        <p class="subtitle">Unleash Your Passion for CARnival Cars</p>
+        <p class="description">At CARnival, we live and breathe Malaysia cars. We are more than just a dealership; we are a gateway to a world where performance, style, and heritage intertwine to create automotive masterpieces.</p>
         <p class="mission">Our Mission:</p>
-        <p class="mission-statement">To provide car enthusiasts with access to the finest selection of JDM vehicles, meticulously curated to ignite your automotive dreams and empower your driving experience.</p>
-        <p class="why-choose">Why Choose JDMania:</p>
+        <p class="mission-statement">To provide car enthusiasts with access to the finest selection of CARnival vehicles, meticulously curated to ignite your automotive dreams and empower your driving experience.</p>
+        <p class="why-choose">Why Choose CARnival:</p>
         <ul class="why-choose-list">
             <li class="why-choose-item">
-                <p>Authentic JDM Vehicles: We handpick each car, ensuring it embodies the essence of the JDM culture and represents the pinnacle of Japanese automotive engineering.</p>
+                <p>Authentic Malaysia Vehicles: We handpick each car, ensuring it embodies the essence of the Malaysia culture and represents the pinnacle of Malaysia automotive engineering.</p>
             </li>
             <li class="why-choose-item">
                 <p>Quality and Transparency: Our team of experts meticulously inspects and verifies the authenticity and performance of every vehicle, providing you with peace of mind and confidence in your purchase.</p>
             </li>
             <li class="why-choose-item">
-                <p>Passionate Expertise: Our knowledgeable staff are true car enthusiasts, ready to share their expertise, offer valuable insights, and guide you towards your perfect JDM car.</p>
+                <p>Passionate Expertise: Our knowledgeable staff are true car enthusiasts, ready to share their expertise, offer valuable insights, and guide you towards your perfect Malaysia car.</p>
             </li>
             <li class="why-choose-item">
                 <p>Exceptional Buying Experience: From browsing our extensive inventory to personalized test drives and seamless transactions, we prioritize your satisfaction and strive to exceed your expectations.</p>
             </li>
             <li class="why-choose-item">
-                <p>Join the JDM Community: By choosing JDMania, you become part of a vibrant community of passionate JDM enthusiasts, where your love for cars can flourish and connections can be forged.</p>
+                <p>Join the Malaysia Community: By choosing CARnival, you become part of a vibrant community of passionate Malaysia enthusiasts, where your love for cars can flourish and connections can be forged.</p>
             </li>
         </ul>
-        <p class="start-journey">Start Your JDM Adventure Today!</p>
-        <p class="explore-inventory">Explore our diverse inventory of JDM vehicles, immerse yourself in the legacy of automotive greatness, and embark on an unforgettable journey behind the wheel of your dream car.</p>
+        <p class="start-journey">Start Your Malaysia Adventure Today!</p>
+        <p class="explore-inventory">Explore our diverse inventory of Malaysia vehicles, immerse yourself in the legacy of automotive greatness, and embark on an unforgettable journey behind the wheel of your dream car.</p>
     </div>
 </body>
 </html>
@@ -417,16 +417,17 @@ else{
 
 
     <!-- FOOTER -->
- <footer>
+    <footer>
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
 
@@ -445,7 +446,7 @@ else{
                         <input type="text" placeholder="Write Your Thoughts">
                     </div>
                     <div class="button">
-                    <a href="mailto:" class="btn btn-primary" style="border-color:#bf2e2e; background-color:#bf2e2e;">Send</a>
+                        <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
                     </div>
                 </div>
             </div>
@@ -454,6 +455,7 @@ else{
             <div class="row text-center">
                 <div class="col-12">
                    <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>

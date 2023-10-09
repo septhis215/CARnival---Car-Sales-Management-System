@@ -6,7 +6,17 @@ if(!isset($_SESSION)){
 include_once("connections/connect.php");
 $con = connect();
 
-if(isset($_POST['login'])){
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
+    $email = $_POST['email'];
+    $token = bin2hex(random_bytes(32));
+
+    $sql = "UPDATE tbluser SET reset_token='$token', reset_token_timestamp=NOW() WHERE email='$email'";
+    $con->query($sql) or die($con->error);
+    echo "Password reset instructions sent to your email.";
+    exit;
+}   
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['login']))){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -22,6 +32,7 @@ if(isset($_POST['login'])){
         $_SESSION['Access'] = $row['Access'];
         $_SESSION['firstname'] = $row['Firstname'];
         $_SESSION['lastname'] = $row['Lastname'];
+        $_SESSION['surname'] = $row['Surname'];
         $_SESSION['photo'] = $row['photo'];
 
         if($row['status'] == "offline.png"){
@@ -118,7 +129,7 @@ if(isset($_POST['register'])){
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -127,21 +138,21 @@ if(isset($_POST['register'])){
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                     <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <div class="dropdown-content">
+                        <!-- <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="jdm-classics.php">Classic Cars</a>
-                        </div>
+                        </div> -->
                     </li>
                
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Car Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li>
+                    </li> -->
                 
                     <li class="nav-item dropdown">
                         <a href="about.php" class="nav-link dropbtn">About</a>
@@ -187,9 +198,15 @@ if(isset($_POST['register'])){
                             <br>
                             <label for="inputPassword">Password: </label>
                             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            
+                            <div class="input-group-append">
+                            <a href="reset_password.php" class="btn btn-link">Forgot Password?</a>
+                            </div>
+                            
                             <br><br>
                             <button type="submit" name=login class="btn btn-primary btn-md" style="border-color:#bf2e2e; background-color:#bf2e2e;">Log In</button>
-                        </div>
+                                                
+                        </div>                      
                     </form>
                 </div>
                 <div class="col-3"></div>
@@ -206,16 +223,17 @@ if(isset($_POST['register'])){
 
 
      <!-- FOOTER -->
- <footer>
+     <footer>
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
 
@@ -234,7 +252,7 @@ if(isset($_POST['register'])){
                         <input type="text" placeholder="Write Your Thoughts">
                     </div>
                     <div class="button">
-                    <a href="mailto:" class="btn btn-primary" style="border-color:#bf2e2e; background-color:#bf2e2e;">Send</a>
+                        <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
                     </div>
                 </div>
             </div>
@@ -243,6 +261,7 @@ if(isset($_POST['register'])){
             <div class="row text-center">
                 <div class="col-12">
                    <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>

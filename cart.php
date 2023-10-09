@@ -388,7 +388,7 @@ $con=connect();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | <?php echo $_SESSION['firstname']."'s"?> Cart</title>
+    <title>CARnival | <?php echo $_SESSION['firstname']."'s"?> Cart</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -410,7 +410,7 @@ $con=connect();
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -426,21 +426,21 @@ $con=connect();
                                     <ul class="navbar-nav">
                                         <li class="nav-item dropdown">
                                             <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                                            <div class="dropdown-content">
+                                            <!-- <div class="dropdown-content">
                                                 <a href="hot-deals.php" >Hot Deals</a>
                                                 <a href="new-arrival.php">New Arrival</a>
                                                 <a href="jdm-classics.php">JDM Classics</a>
-                                            </div>
+                                            </div> -->
                                         </li>
                                     
-                                        <li class="nav-item dropdown">
+                                        <!-- <li class="nav-item dropdown">
                                             <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                                             <div class="dropdown-content">
                                                 <a href="best-sellers.php">Best Sellers</a>
                                                 <a href="car-accessories.php">Car Accessories</a>
                                                 <a href="jdm-clothing.php">JDM Clothing</a>
                                             </div>
-                                        </li>
+                                        </li> -->
                                     
                                         <li class="nav-item dropdown">
                                             <a href="about.php" class="nav-link dropbtn">About</a>
@@ -477,7 +477,7 @@ $con=connect();
 
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
                     <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></a>
+                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
                     </li>
                     <?php } else { ?>
                         <li class="nav-item">
@@ -519,7 +519,7 @@ $con=connect();
                </h1>
                 <div class="row">
                 <div class="col-12">
-                <h1><?php echo $_SESSION['firstname']." ".$_SESSION['lastname'];?>
+                <h1><?php echo $_SESSION['surname']?>
                     <h6 class="text-left">&nbsp<?php echo $_SESSION['UserLogIn']?></h6>
                     <h5 class="text-left">&nbspID: #<?php echo $_SESSION['ID']?></h5>
                         </div>
@@ -588,8 +588,8 @@ $con=connect();
                 <div class="row">
                     <div class="col-12">
                         <p class="lead">Customer Name: <?php echo $_SESSION['firstname']." ".$_SESSION['lastname']?></p>
-                        <p class="lead">Shipping Address: <?php echo $_SESSION['houseno']." ".$_SESSION['street']." ".$_SESSION['brgy']." ".$_SESSION['city']." ".$_SESSION['prov']?></p>
-                        <p class="lead">Contact Number: <?php echo $_SESSION['contact']?></p>
+                        <!-- <p class="lead">Shipping Address: <?php echo $_SESSION['houseno']." ".$_SESSION['street']." ".$_SESSION['brgy']." ".$_SESSION['city']." ".$_SESSION['prov']?></p> -->
+                        <p class="lead">Contact: <?php echo $_SESSION['email']?></p>
                     </div>
                 </div>
 
@@ -672,7 +672,7 @@ $con=connect();
 
                         <td scope="row" class="cart-item-name align-middle">
                             <a href="cart.php?buy=<?php echo $row['transactionID'];?>"><input type=hidden name=orderID  value="<?php echo $row['transactionID'];?>">
-                            <button type=submit style=form-control name=buy id=btndel><img src="images/buttons/payment-method.png"></button>
+                            <button type=submit class=form-control name=buy id=btndel><img src="images/buttons/payment-method.png"></button>
                         </td>     
 
                         <td class="align-middle">
@@ -685,16 +685,16 @@ $con=connect();
                        <input type=hidden name=price value=<?php echo $row['price'];?>>
                        <input type=hidden name=total value=<?php echo $row['Total'];?>>
                         <td class="cart-item-name align-middle"><?php echo $row['productName'];?></td>
-                        <td class="cart-item-price align-middle">₱<?php echo $row['price'];?>.00</td>
+                        <td class="cart-item-price align-middle">RM<?php echo $row['price'];?>.00</td>
                         <td class="align-middle">
                         
                           <?php echo $row['Quantity'];?>
                             </div>
                         </td>
-                        <td class="cart-item-total-price align-middle">₱<?php echo $row['Total'];?>.00</td>
+                        <td class="cart-item-total-price align-middle">RM<?php echo $row['Total'];?>.00</td>
                         <td class="align-middle">
                         <a href="cart.php?btndel=<?php echo $row['transactionID'];?>"><input type=hidden name=transactID value=<?php echo $row['transactionID'];?>>
-                           <button type=submit style=form-control name=btndel id=btndel><i class="far fa-trash-alt"></i></button>
+                           <button type=submit class=form-control name=btndel id=btndel><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
 			<?php } ?>
@@ -716,7 +716,7 @@ $con=connect();
                 </div>
             </div> 
            
-                <img src="images/background/empty cart.png" style="max-width: 100%">
+                <img src="images/background/empty cart.png" style="max-width:100%;">
               
     </div>
     </div>
@@ -732,15 +732,16 @@ $con=connect();
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
-                
+
                 <div class="col-sm-6 col-lg-3" align="center">
                     <p class="lead">Follow Us On:</p>
                     <div class="col-12 social">
@@ -756,7 +757,7 @@ $con=connect();
                         <input type="text" placeholder="Write Your Thoughts">
                     </div>
                     <div class="button">
-                    <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
+                        <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
                     </div>
                 </div>
             </div>
@@ -765,6 +766,7 @@ $con=connect();
             <div class="row text-center">
                 <div class="col-12">
                    <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>

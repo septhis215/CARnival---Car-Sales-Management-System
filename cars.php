@@ -21,7 +21,7 @@ $con=connect();
         $users = $con->query($sql) or die ($con->error);
         $row = $users->fetch_assoc();
 
-        $sql = "SELECT * FROM tblinventory where `type`='Hot' AND `category`='Cars' order by rand() LIMIT 9";
+        $sql = "SELECT * FROM tblinventory where `category`='Cars' order by productName ASC ";
         $data1 = $con->query($sql) or die ($con->error);
         $sql = "SELECT * FROM tblinventory where `type`='New' AND `category`='Cars' order by rand() LIMIT 9";
         $data2 = $con->query($sql) or die ($con->error);
@@ -131,7 +131,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | Cars</title>
+    <title>CARnival | Cars</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -145,13 +145,13 @@ else{
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.js"></script>
 </head>
-<body style="background-color:black;">
+<body style="background-color:gold;">
 
 
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -161,21 +161,21 @@ else{
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                                <div class="dropdown-content">
+                                <!-- <div class="dropdown-content">
                                     <a href="hot-deals.php">Hot Deals</a>
                                     <a href="new-arrival.php">New Arrival</a>
                                     <a href="jdm-classics.php">Classic Cars</a>
-                                </div>
+                                </div> -->
                             </li>
                         
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                                 <div class="dropdown-content">
                                     <a href="best-sellers.php">Best Sellers</a>
                                     <a href="car-accessories.php">Accessories</a>
                                     <a href="jdm-clothing.php">Jdm Clothing</a>
                                 </div>
-                            </li>
+                            </li> -->
                         
                             <li class="nav-item dropdown">
                                 <a href="about.php" class="nav-link dropbtn">About</a>
@@ -186,21 +186,21 @@ else{
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
                                 <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                                <div class="dropdown-content">
+                                <!-- <div class="dropdown-content">
                                     <a href="hot-deals.php">Hot Deals</a>
                                     <a href="new-arrival.php">New Arrival</a>
                                     <a href="jdm-classics.php">Classic Cars</a>
-                                </div>
+                                </div> -->
                             </li>
                         
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                                 <div class="dropdown-content">
                                     <a href="best-sellers.php">Best Sellers</a>
                                     <a href="car-accessories.php">Accessories</a>
                                     <a href="jdm-clothing.php">Jdm Clothing</a>
                                 </div>
-                            </li>
+                            </li> -->
                         
                             <li class="nav-item dropdown">
                                 <a href="about.php" class="nav-link dropbtn">About</a>
@@ -243,7 +243,7 @@ else{
                         <?php }?>
 
                     <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['firstname']." ".$_SESSION['lastname']; ?></a>
+                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
                     </li>
                     <?php } else { ?>
                         <li class="nav-item">
@@ -261,7 +261,7 @@ else{
     <!-- BANNER CARS -->
     <div class="inline">
             <div class="col-12 men banner-image-container" style="color:white;">
-                <h4 class="display-4">Car Categories</h4>
+                <h4 class="display-4">Car</h4>
             <form action=home.php method=get>
                 <div class="search-boxmen">
                     <input class="search-input" name=searchitem  value="" type="text" placeholder="Search something..">
@@ -289,7 +289,25 @@ else{
 
 
     <!-- PRODUCT CAROUSEL -->
-    <div class="inline">
+
+    <div class="container text-center">
+        <div class="row">
+            <?php while($row = $data1->fetch_array()){?>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <div class="item-wc">
+                <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
+                    <div class="item-description-container">
+                                <h5><?php echo $row['productName']?></h5>
+                                <p><?php echo "RM".$row['price'].".00"?></p>
+                        </div>
+                </div>
+            </div>
+            <?php }?>
+            
+        </div>
+    </div>
+    
+    <!-- <div class="inline">
         <div class="header-container" style="color:white;">
             <span class="header">Hot Deals</span>
         </div>
@@ -306,9 +324,9 @@ else{
                         <div class="item-image-container">
                         <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
                             <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
                                 <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
                                 <?php }?>
                     
                         </div>
@@ -320,16 +338,16 @@ else{
                         </div>
                     </div>
                     <?php } ?>
-                    </div>
-                    <div class="row text-center">
+                    </div> -->
+                    <!-- <div class="row text-center">
                         <div class="col-12">
                         <a href="hot-deals.php"><button class="btn btn-primary btn-md" style="background-color: #bf2e2e; border-color: #bf2e2e;">See More</button></a>
                         </div>
-                     </div>
+                     </div> -->
                 </div>
                 
             </div>
-                </div>
+        </div>
     
     <br><br><br>
 
@@ -340,7 +358,7 @@ else{
     
 
     <!-- PRODUCT CAROUSEL -->
-    <div class="inline">
+    <!-- <div class="inline">
         <div class="header-container" style="color:white;">
             <span class="header">New Arrival</span>
         </div>
@@ -357,9 +375,9 @@ else{
                         <div class="item-image-container">
                         <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
                             <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
                                 <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
                                 <?php }?>
                     
                         </div>
@@ -384,7 +402,7 @@ else{
             </div>
                 </div>
     
-    <br><br><br>
+    <br><br><br> -->
 
 
 
@@ -393,7 +411,7 @@ else{
 
 
     <!-- PRODUCT CAROUSEL -->
-    <div class="inline">
+    <!-- <div class="inline">
         <div class="header-container" style="color:white;">
             <span class="header">Jdm Classics</span>
         </div>
@@ -410,9 +428,9 @@ else{
                         <div class="item-image-container">
                         <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
                             <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
                                 <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "₱".$row['price']?></div>
+                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
                                 <?php }?>
                     
                         </div>
@@ -437,7 +455,7 @@ else{
             </div>
                 </div>
     
-    <br><br><br>
+    <br><br><br> -->
 
 
 
@@ -447,19 +465,20 @@ else{
 
 
     <!-- FOOTER -->
- <footer>
+    <footer>
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
-                
+
                 <div class="col-sm-6 col-lg-3" align="center">
                     <p class="lead">Follow Us On:</p>
                     <div class="col-12 social">
@@ -475,7 +494,7 @@ else{
                         <input type="text" placeholder="Write Your Thoughts">
                     </div>
                     <div class="button">
-                    <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
+                        <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
                     </div>
                 </div>
             </div>
@@ -484,6 +503,7 @@ else{
             <div class="row text-center">
                 <div class="col-12">
                    <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>

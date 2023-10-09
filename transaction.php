@@ -344,7 +344,7 @@ $con=connect();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JDM | Transactions</title>
+    <title>CARnival | Transactions</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -366,7 +366,7 @@ $con=connect();
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="accounts.php" class="navbar-brand logo-container"><img src="images/Logo.png" alt="" class="logo"></a>
+            <a href="accounts.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
@@ -484,9 +484,9 @@ $con=connect();
                             <th scope="row"><?php echo $row['transactionID'];?></th>
                             <td><?php echo $row['customerName']?></td>
                             <td><?php echo $row['productName'];?></td>
-                            <td>₱<?php echo $row['price'];?>.00</td>
+                            <td>RM<?php echo $row['price'];?>.00</td>
                             <td><?php echo $row['Quantity'];?></td>
-                            <td>₱<?php echo $row['Total'];?>.00</td>
+                            <td>RM<?php echo $row['Total'];?>.00</td>
                             <td><?php echo $row['Date'];?></td>
                             <td><?php echo $row['Time'];?></td>
                             <td><?php echo $row['Status']; ?></td>
@@ -559,9 +559,9 @@ $con=connect();
                             <th scope="row"><?php echo $row['transactionID'];?></th>
                             <td><?php echo $row['customerName']?></td>
                             <td><?php echo $row['productName'];?></td>
-                            <td>₱<?php echo $row['price'];?>.00</td>
+                            <td>RM<?php echo $row['price'];?>.00</td>
                             <td><?php echo $row['Quantity'];?></td>
-                            <td>₱<?php echo $row['Total'];?>.00</td>
+                            <td>RM<?php echo $row['Total'];?>.00</td>
                             <td><?php echo $row['Date'];?></td>
                             <td><?php echo $row['Time'];?></td>
                             <td><?php echo $row['Status']; ?></td>
@@ -582,12 +582,13 @@ $con=connect();
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">JDMania Auto Deals</h4>
+                    <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
-                    We are JDMania Auto Deals, the ultimate destination for JDM enthusiasts. We offer a curated 
-                    selection of top-tier JDM vehicles that ignite the senses, from iconic classics to cutting-edge 
-                    performance machines. Experience the heart and soul of JDM culture with us, where horsepower meets 
-                    passion in perfect harmony.
+                        Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
+                    Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
+                    From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
+                    we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
+                    creating a symphony of excitement and entertainment in perfect harmony.
                     </p>
                 </div>
 
@@ -606,7 +607,7 @@ $con=connect();
                         <input type="text" placeholder="Write Your Thoughts">
                     </div>
                     <div class="button">
-                        <a href="mailto:" class="btn btn-primary" style="border-color:#bf2e2e; background-color:#bf2e2e;">Send</a>
+                        <a href="mailto:" class="btn btn-primary" style="background-color: #bf2e2e; border-color: #bf2e2e;">Send</a>
                     </div>
                 </div>
             </div>
@@ -615,6 +616,7 @@ $con=connect();
             <div class="row text-center">
                 <div class="col-12">
                    <p>Copyright © 2023 | All Rights Reserved</p>
+                   <p>By Group Vroom</p>
                 </div>
             </div>
         </div>
