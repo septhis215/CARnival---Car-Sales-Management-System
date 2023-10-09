@@ -404,7 +404,7 @@ $con=connect();
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap-notify.min.js"></script>
 </head>
-<body style="color:#fff; background-color:#000;">
+<body style="color:#fff; background-color:gold;">
 
 
     <!-- NAVIGATION -->
@@ -601,10 +601,10 @@ $con=connect();
                         <p class="lead">Select Payment Method: </p>
                     </div>
                     <div class="col-6">
-                       <button type=submit class="btn btn-block btn-primary" id="btn-cod"  name=cod >Cash On Delivery <i class="fas fa-truck align-middle"></i></button>
+                       <button type=submit class="btn btn-block btn-primary" id="btn-cod"  name=cod >Pay - Delivery <i class="fas fa-truck align-middle"></i></button>
                     </div>
                     <div class="col-6">
-                  <button type=submit class="btn btn-block btn-success" id="btn-express" name=online  >Express Payment <i class="fab fa-bitcoin align-middle"></i></button></a>
+                  <button type=submit class="btn btn-block btn-success" id="btn-express" name=online  >Pay - Pick Up <i class="fab fa-bitcoin align-middle"></i></button></a>
                     </div>
                 </div>
                 <br><br>
@@ -654,7 +654,7 @@ $con=connect();
         <br><br>   
         <div class="row table-responsive table-container">
             <table class="table table-hover">
-                <thead class="thead-dark">
+                <thead class="thead-white">
                     <tr>
                         <th scope="col">&nbsp&nbsp</th>
                         <th scope="col">Image</th>

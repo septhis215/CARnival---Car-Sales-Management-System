@@ -196,7 +196,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap-notify.min.js"></script>
 </head>
-<body style="color:#fff; background-color:#000;">
+<body style="color:black; background-color:gold;">
 
 
     <!-- NAVIGATION -->
@@ -347,7 +347,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
         <br><br>   
         <div class="row table-responsive table-container" style="color:white;">
             <table class="table table-hover">
-                <thead class="thead-dark">
+                <thead class="thead-white">
                     <tr>
                         <th scope="col">Image</th>
                         <th scope="col">Product Name</th>
@@ -381,7 +381,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     <br><br><br><br><br><br><br><br><br><br>
     
     <?php } else{?>
-        <div class="container text-center" style="color:white;">
+        <div class="container text-center" style="color:black;">
             <div class="row">
                 <div class="col-12">
                     <h1 class="display-3">No Purchase Found!</h1>
