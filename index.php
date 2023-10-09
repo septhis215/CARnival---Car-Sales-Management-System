@@ -414,7 +414,7 @@ else{
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap-notify.min.js"></script>
 </head>
-<body onload="document.getElementById('ratings').innerHTML = getRndInteger(50,100)" style="color:#fff; background-color:black;">
+<body onload="document.getElementById('ratings').innerHTML = getRndInteger(50,100)" style="color:#fff; background-color:gold;">
 
 
 
