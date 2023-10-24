@@ -859,41 +859,34 @@ else{
         <br><br><br>
         <div class="row text-center categories">
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/ford everest.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Ford"><img src="images/products/ford everest.png" alt="Ford Cars"></a>
                 <h4>Ford Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/honda city.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Honda"><img src="images/products/honda city.png" alt="Honda Cars"></a>
                 <h4>Honda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/lancer evo 3.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Lancer"><img src="images/products/lancer evo 3.png" alt="Lancer Cars"></a>
                 <h4>Lancer Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/mazda rx3.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Mazda"><img src="images/products/mazda rx3.png" alt="Mazda Cars"></a>
                 <h4>Mazda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/nissan 180sx.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Nissan"><img src="images/products/nissan 180sx.png" alt="Nissan Cars"></a>
                 <h4>Nissan Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/subaru impreza white.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Subaru"><img src="images/products/subaru impreza white.png" alt="Subaru Cars"></a>
                 <h4>Subaru Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/toyota raize.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Toyota"><img src="images/products/toyota raize.png" alt="Toyota Cars"></a>
                 <h4>Toyota Cars</h4>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/home/car merchandise.jpg" alt="Cars"></a>
-                <h4>Merchandise</h4>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/home/all about.jpg" alt="Cars"></a>
-                <h4>About</h4>
-            </div>
+
             </div>
         </div>
     </div>

@@ -39,7 +39,7 @@ $con=connect();
         $sql = "SELECT * FROM tblinventory";
         $pr = $con->query($sql) or die ($con->error);
         $row = $pr->fetch_assoc();
-        
+    
         if(isset($_GET['searchitem'])){ 
             $searchkey=$_GET['searchitem'];
             if($searchkey==""){
@@ -562,7 +562,7 @@ else{
                             <?php }?>
                             <hr>
                            
-                            <h1 class="item-description-price"><?php echo "Php. ".$price.".00"?></h1>
+                            <h1 class="item-description-price"><?php echo "RM ".$price.".00"?></h1>
                             <input type=hidden name=photo value="<?php echo $img ?>">
                             <input type=hidden name=prod value="<?php echo $prodname?>">
                             <input type=hidden name=price value="<?php echo $price?>">
@@ -699,7 +699,7 @@ else{
     <div class="carousel-item active">
       <div class="video-wrapper">
         <video class="img-fluid" autoplay muted loop>
-          <source src="images/home/home slider1.mp4" type="video/mp4">
+          <source src="images/home/jdm home 1.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -715,7 +715,7 @@ else{
     <div class="carousel-item">
       <div class="video-wrapper">
         <video class="img-fluid" autoplay muted loop>
-          <source src="images/home/home slider2.mp4" type="video/mp4">
+          <source src="images/home/jdm home 2.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -730,7 +730,7 @@ else{
     <div class="carousel-item">
       <div class="video-wrapper">
         <video class="img-fluid" autoplay muted loop>
-          <source src="images/home/home slider3.mp4" type="video/mp4">
+          <source src="images/home/jdm home 3.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -818,7 +818,7 @@ else{
                         <br><br>
                         <div class="item-container">
                             <div class="item-image-container">
-                                <a href="home.php?select=<?php echo $rows['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$rows['photo']?>" alt=""></button></a>
+                                <a href="home.php?select=<?php echo $rows['productID']?>"><button type=submit name=select id=select>< src="<?php echo "images/products/".$rows['photo']?>" alt=""></button></a>
                                      <?php if($rows['category']=="Men"){?>
                                         <div class="shape men"><?php echo "RM".$rows['price']?></div>
                                     <?php } else if($rows['category']=="Merchandise"){?>
@@ -855,41 +855,36 @@ else{
         <br><br><br>
         <div class="row text-center categories">
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/ford everest.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Ford">
+                    <img src="images/products/ford everest.png" alt="Ford Cars">
+                </a>
                 <h4>Ford Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/honda city.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Honda"><img src="images/products/honda city.png" alt="Honda Cars"></a>
                 <h4>Honda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/lancer evo 3.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Lancer"><img src="images/products/lancer evo 3.png" alt="Lancer Cars"></a>
                 <h4>Lancer Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/mazda rx3.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Mazda"><img src="images/products/mazda rx3.png" alt="Mazda Cars"></a>
                 <h4>Mazda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/nissan 180sx.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Nissan"><img src="images/products/nissan 180sx.png" alt="Nissan Cars"></a>
                 <h4>Nissan Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/subaru impreza white.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Subaru"><img src="images/products/subaru impreza white.png" alt="Subaru Cars"></a>
                 <h4>Subaru Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/products/toyota raize.png" alt="Cars"></a>
+                <a href="cars.php?subcategory=Toyota"><img src="images/products/toyota raize.png" alt="Toyota Cars"></a>
                 <h4>Toyota Cars</h4>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/home/car merchandise.jpg" alt="Cars"></a>
-                <h4>Merchandise</h4>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php"><img src="images/home/all about.jpg" alt="Cars"></a>
-                <h4>About</h4>
-            </div>
+
             </div>
         </div>
     </div>

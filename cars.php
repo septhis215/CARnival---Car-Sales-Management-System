@@ -28,8 +28,20 @@ $con=connect();
         $sql = "SELECT * FROM tblinventory where `type`='Classic' AND `category`='Cars' order by rand() LIMIT 9";
         $data3 = $con->query($sql) or die ($con->error);
 
+        $subcategoryFilter = isset($_GET['subcategory']) ? $_GET['subcategory'] : 'all';
+
+        if ($subcategoryFilter === 'all') {
+            $sql = "SELECT * FROM tblinventory WHERE `category`='Cars'";
+            } else {
+            $subcategoryFilter = $con->real_escape_string($subcategoryFilter);
+            $sql = "SELECT * FROM tblinventory WHERE `category`='Cars' AND `subcategory`='$subcategoryFilter'";
+            }
+            $data4 = $con->query($sql) or die($con->error);
+
         $sql=  "SELECT * FROM tbltransaction";
+
         $transaction = $con->query($sql) or die ($con->error);
+        
         
 
 if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
@@ -292,10 +304,14 @@ else{
 
     <div class="container text-center">
         <div class="row">
-            <?php while($row = $data1->fetch_array()){?>
+            <?php while($row = $data4->fetch_array()){?>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
                 <div class="item-wc">
-                <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
+                <a href="home.php?select=<?php echo $row['productID']?>">
+                <button type=submit name=select id=select>
+                    <img src="<?php echo "images/products/".$row['photo']?>" alt="">
+                </button>
+                </a>
                     <div class="item-description-container">
                                 <h5><?php echo $row['productName']?></h5>
                                 <p><?php echo "RM".$row['price'].".00"?></p>
