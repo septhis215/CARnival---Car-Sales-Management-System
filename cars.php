@@ -11,44 +11,58 @@ $con=connect();
         $id=0;
         $fname = "";
         $lname = "";
-        $email = "";
+        $username = "";
         $password = "";
-        $address = "";
+        $email = "";
         $phone = "";
+        $address = "";
         $signup=false;
          
-        $sql = "SELECT * FROM tbluser";
+        $sql = "SELECT * FROM users";
         $users = $con->query($sql) or die ($con->error);
         $row = $users->fetch_assoc();
 
-        $sql = "SELECT * FROM tblinventory where `category`='Cars' order by productName ASC ";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`  
+        order by `inventory`.`modelID` ASC ";
         $data1 = $con->query($sql) or die ($con->error);
-        $sql = "SELECT * FROM tblinventory where `type`='New' AND `category`='Cars' order by rand() LIMIT 9";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`  order by rand() LIMIT 9";
         $data2 = $con->query($sql) or die ($con->error);
-        $sql = "SELECT * FROM tblinventory where `type`='Classic' AND `category`='Cars' order by rand() LIMIT 9";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`  order by rand() LIMIT 9";
         $data3 = $con->query($sql) or die ($con->error);
 
-        $subcategoryFilter = isset($_GET['subcategory']) ? $_GET['subcategory'] : 'all';
+        // $subcategoryFilter = isset($_GET['manufacturerName']) ? $_GET['manufacturerName'] : 'all';
+        $subcategoryFilter1 = isset($_GET['manufacturerName']) ? $con->real_escape_string($_GET['manufacturerName']) : 'all';
+        $subcategoryFilter2 = isset($_GET['carTypeName']) ? $con->real_escape_string($_GET['carTypeName']) : 'all';
 
-        if ($subcategoryFilter === 'all') {
-            $sql = "SELECT * FROM tblinventory WHERE `category`='Cars'";
-            } else {
-            $subcategoryFilter = $con->real_escape_string($subcategoryFilter);
-            $sql = "SELECT * FROM tblinventory WHERE `category`='Cars' AND `subcategory`='$subcategoryFilter'";
-            }
-            $data4 = $con->query($sql) or die($con->error);
-
-        $sql=  "SELECT * FROM tbltransaction";
-
-        $transaction = $con->query($sql) or die ($con->error);
+        if ($subcategoryFilter1 === 'all' && $subcategoryFilter2 === 'all') { 
+            $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+                    INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+                    INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`
+                    WHERE `inventory`.`status`='0'";
+        } else {
+            $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+                    INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+                    INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` 
+                    WHERE (`cartype`.`carTypeName`='$subcategoryFilter2' OR `manufacturers`.`manufacturerName`='$subcategoryFilter1') AND `inventory`.`status`='0'";
+        }
         
+        $data4 = $con->query($sql) or die($con->error);
+
+        $sql=  "SELECT * FROM transaction_list";
+        $transaction = $con->query($sql) or die ($con->error);
         
 
 if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     $signup=true;
     $user=$_SESSION['ID'];
     
-    $sql="SELECT COUNT(tbltransaction.`transactionID`) AS 'NOTIF' FROM `tbltransaction` INNER JOIN `tbluser` ON `tbltransaction`.`userID`=`tbluser`.`userID` WHERE tbltransaction.`Status`='Added to cart' AND tbltransaction.`userID`='$user'";
+    $sql="SELECT COUNT(transaction_list.`id`) AS 'NOTIF' FROM `transaction_list` INNER JOIN `customer` ON `transaction_list`.`custID`=`customer`.`custID` WHERE transaction_list.`Status`='Added to cart' AND transaction_list.`custID`='$user'";
     $cart = $con->query($sql) or die ($con->error);
     $notif = mysqli_fetch_assoc($cart);
     $count=$notif['NOTIF'];
@@ -58,16 +72,19 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
 
         $ID=$_GET['select'];
 
-        $sql = "SELECT * FROM tblinventory where productID=$ID";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` where `inventory`.`status`='0' AND inventoryID=$ID";
         $pic = $con->query($sql) or die ($con->error);
         $row = $pic->fetch_assoc();
-        $img=$row['photo'];
-        $prodname=$row['productName'];
+        $vr_number=$row['vr_number'];
+        $variant=$row['variant'];
+        $colors=$row['colors'];
+        $engine=$row['engine_number'];
+        $chasis=$row['chasis_number'];
+        $prodname=$row['model'];
         $price=$row['price'];
-        $left=$row['quantity'];
-        $desc1=$row['itemdesc1'];
-        $desc2=$row['itemdesc2'];
-        $desc3=$row['itemdesc3'];
+        $img=$row['imagePath'];
 
         if(isset($_POST['add'])){
             
@@ -119,16 +136,19 @@ else{
 
         $ID=$_GET['select'];
 
-        $sql = "SELECT * FROM tblinventory where productID=$ID";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` where `inventory`.`status`='0' AND inventoryID=$ID";
         $pic = $con->query($sql) or die ($con->error);
         $row = $pic->fetch_assoc();
-        $img=$row['photo'];
-        $prodname=$row['productName'];
+        
+        $prodname=$row['vr_number'];
+        $variant=$row['variant'];
+        $colors=$row['colors'];
+        $engine=$row['engine_number'];
+        $chasis=$row['chasis_number'];
         $price=$row['price'];
-        $left=$row['quantity'];
-        $desc1=$row['itemdesc1'];
-        $desc2=$row['itemdesc2'];
-        $desc3=$row['itemdesc3'];
+        $img=$row['imagePath'];
 
         if(isset($_POST['add'])||isset($_POST['buy'])){
             echo header("Refresh:0; url=LogIn.php");
@@ -157,112 +177,112 @@ else{
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.js"></script>
 </head>
-<body style="background-color:gold;">
+<body style="background-color:black;">
 
 
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
+            <a href="home.php" class="navbar-brand logo-container">
+                <div class="logo"><span>CARnival</span></div>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
+            <hr class="dropdown-divider">
+
                 <ul class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                                <!-- <div class="dropdown-content">
-                                    <a href="hot-deals.php">Hot Deals</a>
-                                    <a href="new-arrival.php">New Arrival</a>
-                                    <a href="jdm-classics.php">Classic Cars</a>
-                                </div> -->
-                            </li>
-                        
-                            <!-- <li class="nav-item dropdown">
-                                <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
-                                <div class="dropdown-content">
-                                    <a href="best-sellers.php">Best Sellers</a>
-                                    <a href="car-accessories.php">Accessories</a>
-                                    <a href="jdm-clothing.php">Jdm Clothing</a>
-                                </div>
-                            </li> -->
-                        
-                            <li class="nav-item dropdown">
-                                <a href="about.php" class="nav-link dropbtn">About</a>
-                            </li>
-                        </ul>
-                    
-                    <?php } else{ ?>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                                <!-- <div class="dropdown-content">
-                                    <a href="hot-deals.php">Hot Deals</a>
-                                    <a href="new-arrival.php">New Arrival</a>
-                                    <a href="jdm-classics.php">Classic Cars</a>
-                                </div> -->
-                            </li>
-                        
-                            <!-- <li class="nav-item dropdown">
-                                <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
-                                <div class="dropdown-content">
-                                    <a href="best-sellers.php">Best Sellers</a>
-                                    <a href="car-accessories.php">Accessories</a>
-                                    <a href="jdm-clothing.php">Jdm Clothing</a>
-                                </div>
-                            </li> -->
-                        
-                            <li class="nav-item dropdown">
-                                <a href="about.php" class="nav-link dropbtn">About</a>
-                            </li>
-                        </ul>
-                    <?php }?>
-
-                    <?php if($signup==true){?>
-                    <li class="nav-item" id="account">
-                    <div class="navbar-collapse" id="navbar-list-4">
-                            <ul class="navbar-nav">
-                            <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?php echo 'images/avatars/'.$_SESSION['photo']?>" width="30" height="30" class="rounded-circle">
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="user-account.php" class="dropdown-item"><i class="fas fa-shopping-bag"></i> &nbspMy Orders</a>
-                                <a href="LogOut.php?logout=<?php echo $_SESSION['ID']?>" class="dropdown-item" name=logout><span class="fas fa-sign-out-alt"></span>&nbsp&nbspLogout</a>
-                                </div>
-                            </li>
-                            <?php } else { ?>
-                        <li class="nav-item">
-                        <a href="LogIn.php" class="nav-link">Login</a>
-                    </li>
-                    <?php }?>
-                            </ul>
+                        <!-- <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="cars.php" class="nav-link dropbtn">Cars</a>
+                        <div class="dropdown-content">
+                            <a href="hot-deals.php">Hot Deals</a>
+                            <a href="new-arrival.php">New Arrival</a>
+                            <a href="jdm-classics.php">Classic Cars</a>
                         </div>
                     </li>
-                    
-                    <?php } else{ ?>
-                    
-                    <li class="nav-item" id="signup">
-                        <a href="sign-up.php"  class="nav-link">Sign Up</a>
+                
+                    <li class="nav-item dropdown">
+                        <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
+                        <div class="dropdown-content">
+                            <a href="best-sellers.php">Best Sellers</a>
+                            <a href="car-accessories.php">Accessories</a>
+                            <a href="jdm-clothing.php">Jdm Clothing</a>
+                        </div>
                     </li>
+                
+                    <li class="nav-item dropdown">
+                        <a href="about.php" class="nav-link dropbtn">About</a>
+                    </li>
+                </ul> -->
+                      
+                    <?php } else{ ?>
+                        <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="cars.php" class="nav-link dropbtn">Cars</a>
+                        <!-- <div class="dropdown-content">
+                            <a href="hot-deals.php">Hot Deals</a>
+                            <a href="new-arrival.php">New Arrival</a>
+                            <a href="jdm-classics.php">Classic Cars</a>
+                        </div> -->
+                    </li>
+                
+                    <!-- <li class="nav-item dropdown">
+                        <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
+                        <div class="dropdown-content">
+                            <a href="best-sellers.php">Best Sellers</a>
+                            <a href="car-accessories.php">Accessories</a>
+                            <a href="jdm-clothing.php">Jdm Clothing</a>
+                        </div>
+                    </li> -->
+                
+                    <li class="nav-item dropdown">
+                        <a href="about.php" class="nav-link dropbtn">About Us</a>
+                    </li>
+                </ul>
                     <?php }?>
+                    <!-- <?php if($signup==true){?>
+                        <li class="nav-item" id="account">
+                            <div class="navbar-collapse" id="navbar-list-4">
+                                <ul class="navbar-nav ">
+                                    <?php if (isset($_SESSION['UserLogIn'])){ ?>
+                                    <li class="dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="<?php echo 'images/avatars/'.$_SESSION['photo']?>" width="30" height="30" class="rounded-circle">
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a href="user-account.php" class="dropdown-item"><i class="fas fa-shopping-bag"></i>&nbsp&nbspMy Orders</a>  
+                                            <a href="LogOut.php?logout=<?php echo $_SESSION['ID']?>" class="dropdown-item" name=logout><span class="fas fa-sign-out-alt"></span>&nbsp&nbspLogout</a>
+                                        </div>
+            
+                                    </li>
+                                    <?php } else { ?>
+                                    <li class="nav-item">
+                                        <a href="LogIn.php" class="nav-link">Login</a>
+                                    </li>
+                                    <?php }?>
+                                </ul>
+                            </div>
+                        </li>
+                    <?php } else{ ?>
+                        <li class="nav-item" id="signup">
+                            <a href="sign-up.php"  class="nav-link">Sign Up</a>
+                        </li>
+                    <?php }?> -->
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <?php if($count!='0'){?>
+                        <!-- <?php if($count!='0'){?>
                             <style>.cart-button:before {content: "<?php echo $count ?>"}</style>
                         <?php }?>
-
-                    <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
-                    </li>
+                        <li class="nav-item" id=name>
+                            <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname']?></a>
+                        </li> -->
                     <?php } else { ?>
                         <li class="nav-item">
-                        <a href="LogIn.php" class="nav-link">Login</a>
-                    </li>
+                            <a href="csms/admin/login.php" class="nav-link">Login</a>
+                        </li>
                     <?php }?>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -278,7 +298,7 @@ else{
                 <div class="search-boxmen">
                     <input class="search-input" name=searchitem  value="" type="text" placeholder="Search something..">
                     <button class="search-btn"><i class="fas fa-search"></i></a></button>
-                    <?php if (isset($_SESSION['UserLogIn'])){ ?>
+                    <!-- <?php if (isset($_SESSION['UserLogIn'])){ ?>
                         <a href="cart.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
@@ -286,7 +306,7 @@ else{
                             <a href="LogIn.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
-                            <?php }?>
+                            <?php }?> -->
                 </div>
             </form>
             </div>
@@ -307,14 +327,14 @@ else{
             <?php while($row = $data4->fetch_array()){?>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
                 <div class="item-wc">
-                <a href="home.php?select=<?php echo $row['productID']?>">
+                <a href="home.php?select=<?php echo $row['inventoryID']?>">
                 <button type=submit name=select id=select>
-                    <img src="<?php echo "images/products/".$row['photo']?>" alt="">
+                    <img src="<?php echo $row['imagePath']?>" alt="">
                 </button>
                 </a>
                     <div class="item-description-container">
-                                <h5><?php echo $row['productName']?></h5>
-                                <p><?php echo "RM".$row['price'].".00"?></p>
+                                <h5><?php echo $row['manufacturerName']." ".$row['model']?></h5>
+                                <p><?php echo "RM" . number_format($row['price'], 0, '', ',')?></p>
                         </div>
                 </div>
             </div>
@@ -323,160 +343,7 @@ else{
         </div>
     </div>
     
-    <!-- <div class="inline">
-        <div class="header-container" style="color:white;">
-            <span class="header">Hot Deals</span>
-        </div>
-        <br><br><br>
-       
-        <div class="row text-center" style="color:#fff;">
-        
-            <div class="col-12">
-                <div class="owl-carousel owl-theme">
-                    
-                <?php while($row = $data1->fetch_array()){ ?>
-                    <div class="item">
-                        <div class="item-container">
-                        <div class="item-image-container">
-                        <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
-                            <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
-                                <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
-                                <?php }?>
-                    
-                        </div>
-                        
-                             <div class="item-description-container">
-                                <h5><?php echo $row['productName']?></h5>
-                                <p><?php echo $row['itemdesc1']?></p>
-                        </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    </div> -->
-                    <!-- <div class="row text-center">
-                        <div class="col-12">
-                        <a href="hot-deals.php"><button class="btn btn-primary btn-md" style="background-color: #bf2e2e; border-color: #bf2e2e;">See More</button></a>
-                        </div>
-                     </div> -->
-                </div>
-                
-            </div>
-        </div>
-    
     <br><br><br>
-
-
-
-
-
-    
-
-    <!-- PRODUCT CAROUSEL -->
-    <!-- <div class="inline">
-        <div class="header-container" style="color:white;">
-            <span class="header">New Arrival</span>
-        </div>
-        <br><br><br>
-       
-        <div class="row text-center" style="color:white;">
-        
-            <div class="col-12">
-                <div class="owl-carousel owl-theme">
-                    
-                <?php while($row = $data2->fetch_array()){ ?>
-                    <div class="item">
-                        <div class="item-container">
-                        <div class="item-image-container">
-                        <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
-                            <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
-                                <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
-                                <?php }?>
-                    
-                        </div>
-                        
-                             <div class="item-description-container">
-                                <h5><?php echo $row['productName']?></h5>
-                                <p><?php echo $row['itemdesc1']?></p>
-                        </div>
-                        </div>
-                       
-                           
-                    </div>
-                    <?php } ?>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-12">
-                        <a href="new-arrival.php"><button class="btn btn-primary btn-md" style="background-color: #bf2e2e; border-color: #bf2e2e;">See More</button></a>
-                        </div>
-                     </div>
-                </div>
-                
-            </div>
-                </div>
-    
-    <br><br><br> -->
-
-
-
-
-
-
-
-    <!-- PRODUCT CAROUSEL -->
-    <!-- <div class="inline">
-        <div class="header-container" style="color:white;">
-            <span class="header">Jdm Classics</span>
-        </div>
-        <br><br><br>
-       
-        <div class="row text-center" style="color:white;">
-        
-            <div class="col-12">
-                <div class="owl-carousel owl-theme">
-                    
-                <?php while($row = $data3->fetch_array()){ ?>
-                    <div class="item">
-                        <div class="item-container">
-                        <div class="item-image-container">
-                        <a href="home.php?select=<?php echo $row['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$row['photo']?>" alt=""></button></a>
-                            <?php if($row['category']=="Cars"){?>
-                                    <div class="shape cars"><?php echo "RM".$row['price']?></div>
-                                <?php } else if($row['category']=="Merch"){?>
-                                    <div class="shape merch"><?php echo "RM".$row['price']?></div>
-                                <?php }?>
-                    
-                        </div>
-                        
-                             <div class="item-description-container">
-                                <h5><?php echo $row['productName']?></h5>
-                                <p><?php echo $row['itemdesc1']?></p>
-                            </div>
-                        </div>
-                       
-                           
-                    </div>
-                    <?php } ?>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-12">
-                        <a href="jdm-classics.php"><button class="btn btn-primary btn-md" style="background-color: #bf2e2e; border-color: #bf2e2e;">See More</button></a>
-                        </div>
-                     </div>
-                </div>
-                
-            </div>
-                </div>
-    
-    <br><br><br> -->
-
-
-
-
-
 
 
 
@@ -485,14 +352,14 @@ else{
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">CARnival Auto Deals</h4>
+                    <!-- <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
                         Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
                     Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
                     From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
                     we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
                     creating a symphony of excitement and entertainment in perfect harmony.
-                    </p>
+                    </p> -->
                 </div>
 
                 <div class="col-sm-6 col-lg-3" align="center">

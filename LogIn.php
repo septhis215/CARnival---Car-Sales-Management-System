@@ -6,17 +6,7 @@ if(!isset($_SESSION)){
 include_once("connections/connect.php");
 $con = connect();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
-    $email = $_POST['email'];
-    $token = bin2hex(random_bytes(32));
-
-    $sql = "UPDATE tbluser SET reset_token='$token', reset_token_timestamp=NOW() WHERE email='$email'";
-    $con->query($sql) or die($con->error);
-    echo "Password reset instructions sent to your email.";
-    exit;
-}   
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['login']))){
+if(isset($_POST['login'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -198,15 +188,9 @@ if(isset($_POST['register'])){
                             <br>
                             <label for="inputPassword">Password: </label>
                             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                            
-                            <div class="input-group-append">
-                            <a href="reset_password.php" class="btn btn-link">Forgot Password?</a>
-                            </div>
-                            
                             <br><br>
                             <button type="submit" name=login class="btn btn-primary btn-md" style="border-color:#bf2e2e; background-color:#bf2e2e;">Log In</button>
-                                                
-                        </div>                      
+                        </div>
                     </form>
                 </div>
                 <div class="col-3"></div>
@@ -227,14 +211,14 @@ if(isset($_POST['register'])){
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">CARnival Auto Deals</h4>
+                    <!-- <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
                         Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
                     Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
                     From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
                     we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
                     creating a symphony of excitement and entertainment in perfect harmony.
-                    </p>
+                    </p> -->
                 </div>
 
                 <div class="col-sm-6 col-lg-3" align="center">

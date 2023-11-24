@@ -11,20 +11,21 @@ $con=connect();
         $id=0;
         $fname = "";
         $lname = "";
-        $email = "";
+        $username = "";
         $password = "";
-        $address = "";
+        $email = "";
         $phone = "";
+        $address = "";
         $signup=false;
 
       
          
-        $sql = "SELECT * FROM tbluser";
+        $sql = "SELECT * FROM users";
         $users = $con->query($sql) or die ($con->error);
         $row = $users->fetch_assoc();
 
 
-        $sql=  "SELECT * FROM tbltransaction";
+        $sql=  "SELECT * FROM transaction_list";
         $transaction = $con->query($sql) or die ($con->error);
         
 
@@ -141,47 +142,51 @@ else{
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.js"></script>
 </head>
-<body style="background-color:gold;">
+<body style="background-color:black;">
 
 
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-md sticky-top navigation">
         <div class="container-fluid">
-            <a href="home.php" class="navbar-brand logo-container"><div class="logo"><span>CARnival</span></div></a>
+            <a href="home.php" class="navbar-brand logo-container">
+                <div class="logo"><span>CARnival</span></div>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="fas fa-bars"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">        
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <hr class="dropdown-divider">
+
                 <ul class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <ul class="navbar-nav">
+                        <!-- <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                            <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <!-- <div class="dropdown-content">
+                        <a href="cars.php" class="nav-link dropbtn">Cars</a>
+                        <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="jdm-classics.php">Classic Cars</a>
-                        </div> -->
+                        </div>
                     </li>
                 
-                    <!-- <li class="nav-item dropdown">
-                        <a href="merchandise.php" class="nav-link dropbtn" id=women>Merchandise</a>
+                    <li class="nav-item dropdown">
+                        <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li> -->
-                
-                        <a href="about.php" class="nav-link dropbtn">About</a>
-                        <div class="dropdown-content">
-                        </div>
                     </li>
-                </ul>
+                
+                    <li class="nav-item dropdown">
+                        <a href="about.php" class="nav-link dropbtn">About</a>
+                    </li>
+                </ul> -->
+                      
                     <?php } else{ ?>
                         <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                            <a href="cars.php" class="nav-link dropbtn">Cars</a>
+                        <a href="cars.php" class="nav-link dropbtn">Cars</a>
                         <!-- <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
@@ -198,56 +203,51 @@ else{
                         </div>
                     </li> -->
                 
-                        <a href="about.php" class="nav-link dropbtn">About</a>
-                        <div class="dropdown-content">
-                        </div>
+                    <li class="nav-item dropdown">
+                        <a href="about.php" class="nav-link dropbtn">About Us</a>
                     </li>
                 </ul>
                     <?php }?>
-                   
-                    <?php if($signup==true){?>
-                    <li class="nav-item" id="account">
-                    <div class="navbar-collapse" id="navbar-list-4">
-                            <ul class="navbar-nav">
-                            <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?php echo 'images/avatars/'.$_SESSION['photo']?>" width="30" height="30" class="rounded-circle">
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="user-account.php" class="dropdown-item"><i class="fas fa-shopping-bag"></i> &nbspMy Orders</a>
-                                <a href="LogOut.php?logout=<?php echo $_SESSION['ID']?>" class="dropdown-item" name=logout><span class="fas fa-sign-out-alt"></span>&nbsp&nbspLogout</a>
-                                </div>
-                            </li>
-                            <?php } else { ?>
-                        <li class="nav-item">
-                        <a href="LogIn.php" class="nav-link">Login</a>
-                    </li>
-                    <?php }?>
-                            </ul>
-                        </div>
-                    </li>
-                    
+                    <!-- <?php if($signup==true){?>
+                        <li class="nav-item" id="account">
+                            <div class="navbar-collapse" id="navbar-list-4">
+                                <ul class="navbar-nav ">
+                                    <?php if (isset($_SESSION['UserLogIn'])){ ?>
+                                    <li class="dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="<?php echo 'images/avatars/'.$_SESSION['photo']?>" width="30" height="30" class="rounded-circle">
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a href="user-account.php" class="dropdown-item"><i class="fas fa-shopping-bag"></i>&nbsp&nbspMy Orders</a>  
+                                            <a href="LogOut.php?logout=<?php echo $_SESSION['ID']?>" class="dropdown-item" name=logout><span class="fas fa-sign-out-alt"></span>&nbsp&nbspLogout</a>
+                                        </div>
+            
+                                    </li>
+                                    <?php } else { ?>
+                                    <li class="nav-item">
+                                        <a href="LogIn.php" class="nav-link">Login</a>
+                                    </li>
+                                    <?php }?>
+                                </ul>
+                            </div>
+                        </li>
                     <?php } else{ ?>
-                    
-                    <li class="nav-item" id="signup">
-                        <a href="sign-up.php"  class="nav-link">Sign Up</a>
-                    </li>
-                    <?php }?>
+                        <li class="nav-item" id="signup">
+                            <a href="sign-up.php"  class="nav-link">Sign Up</a>
+                        </li>
+                    <?php }?> -->
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <?php if($count!='0'){?>
+                        <!-- <?php if($count!='0'){?>
                             <style>.cart-button:before {content: "<?php echo $count ?>"}</style>
                         <?php }?>
-
-                    <li class="nav-item">
-                     <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
-                    </li>
+                        <li class="nav-item" id=name>
+                            <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname']?></a>
+                        </li> -->
                     <?php } else { ?>
                         <li class="nav-item">
-                        <a href="LogIn.php" class="nav-link">Login</a>
-                    </li>
+                            <a href="csms/admin/login.php" class="nav-link">Login</a>
+                        </li>
                     <?php }?>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -264,7 +264,7 @@ else{
                 <div class="search-boxkids">
                     <input class="search-input" name=searchitem  value="" type="text" placeholder="Search something..">
                     <button class="search-btn"><i class="fas fa-search"></i></a></button>
-                    <?php if (isset($_SESSION['UserLogIn'])){ ?>
+                    <!-- <?php if (isset($_SESSION['UserLogIn'])){ ?>
                         <a href="cart.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
@@ -272,7 +272,7 @@ else{
                             <a href="LogIn.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
-                            <?php }?>
+                            <?php }?> -->
                 </div>
             </form>
             </div>
@@ -318,7 +318,7 @@ else{
         .mission {
             font-family:"A4speed";
             font-size: 24px;
-            color: black;
+            color: gold;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -331,7 +331,7 @@ else{
         .why-choose {
             font-family:"A4speed";
             font-size: 24px;
-            color: black;
+            color: gold;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -349,15 +349,18 @@ else{
             width: 400px;
             padding: 20px;
             margin: 10px;
-            background-color: orange;
+            background-color: #1a1a1a;
             border-radius: 10px;
             text-align: center;
         }
         .why-choose-item p {
             font-family:"Cafe";
             font-size: 18px;
-            color: black;
+            color: gold;
             margin: 0;
+        }
+        .introduction p {
+            color: white;
         }
         .start-journey {
             font-family:"A4speed";
@@ -377,11 +380,49 @@ else{
 <body>
     <div class="container">
         <h1>Welcome to CARnival!</h1>
-        <p class="subtitle">Unleash Your Passion for CARnival Cars</p>
+        <!-- <p class="subtitle">Unleash Your Passion for CARnival Cars</p>
         <p class="description">At CARnival, we live and breathe Malaysia cars. We are more than just a dealership; we are a gateway to a world where performance, style, and heritage intertwine to create automotive masterpieces.</p>
         <p class="mission">Our Mission:</p>
-        <p class="mission-statement">To provide car enthusiasts with access to the finest selection of CARnival vehicles, meticulously curated to ignite your automotive dreams and empower your driving experience.</p>
-        <p class="why-choose">Why Choose CARnival:</p>
+        <p class="mission-statement">To provide car enthusiasts with access to the finest selection of CARnival vehicles, meticulously curated to ignite your automotive dreams and empower your driving experience.</p> -->
+        <p class="mission">Group Member:</p>
+        <ul class="why-choose-list">
+            <li class="why-choose-item">
+                <p><img src="images/about_us/Teh Yan Yang.jpg" alt="Teh Yan Yang" weight="150" height="200"></p>
+                <p>Teh Tan Yang(back-end developement)</p>
+                <div class="introduction" style="text-align:left;">
+                    <p><strong>Introduction:</strong></p>
+                    <p>I am Teh Yan Yang and currently studying Degree in Computer Science major of Software Development in INTI College Subang.</p>
+                </div>
+            </li>
+            <li class="why-choose-item">
+                <p><img src="images/about_us/Ng Yong Lin.jpg" alt="Ng Yong Lin" weight="150" height="200"/></p>
+                <p>Ng Yong Lin(back-end developement)</p>
+                <div class="introduction" style="text-align:left;">
+                    <p><strong>Introduction:</strong></p>
+                    <p>I am Ng Yong Lin and currently studying Degree in Computer Science major of Software Development in INTI College Subang.</p>
+                </div>
+            </li>
+            <li class="why-choose-item">
+                <p><img src="images/about_us/Khoo Chun Pin.jpg" alt="Khoo Chun Pin" weight="150" height="200"></p>
+                <p>Khoo Chun Pin(front-end developement)</p>
+                <div class="introduction" style="text-align:left;">
+                    <p><strong>Introduction:</strong></p>
+                    <p>I am Khoo Chun Pin studying Degree in Computer Science major of Data Science in INTI College Subang.</p>
+                    <p>I have been completed my Diploma in Computer Science in INTI College Subang as well.</p>
+                    <p>I like to see fiction e-book and listen to Chinese music as more.</p>
+                    <p>I'm excited to learn new things and interact with my group members.</p>
+                </div>
+            </li>
+            <li class="why-choose-item">
+                <p><img src="images/about_us/Tan Shan Yan.jpg" alt="Tan Shan Yan" weight="150" height="200"/></p>
+                <p>Tan Shan Yan(front-end developement)</p>
+                <div class="introduction" style="text-align:left;">
+                    <p><strong>Introduction:</strong></p>
+                    <p>I am Tan Shan Yan and currently studying Degree in Computer Science major of Data Science in INTI College Subang.</p>
+                </div>
+            </li>
+        </ul>
+        <!-- <p class="why-choose">Why Choose CARnival:</p>
         <ul class="why-choose-list">
             <li class="why-choose-item">
                 <p>Authentic Malaysia Vehicles: We handpick each car, ensuring it embodies the essence of the Malaysia culture and represents the pinnacle of Malaysia automotive engineering.</p>
@@ -400,7 +441,7 @@ else{
             </li>
         </ul>
         <p class="start-journey">Start Your Malaysia Adventure Today!</p>
-        <p class="explore-inventory">Explore our diverse inventory of Malaysia vehicles, immerse yourself in the legacy of automotive greatness, and embark on an unforgettable journey behind the wheel of your dream car.</p>
+        <p class="explore-inventory">Explore our diverse inventory of Malaysia vehicles, immerse yourself in the legacy of automotive greatness, and embark on an unforgettable journey behind the wheel of your dream car.</p> -->
     </div>
 </body>
 </html>
@@ -421,14 +462,14 @@ else{
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">CARnival Auto Deals</h4>
+                    <!-- <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
                         Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
                     Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
                     From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
                     we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
                     creating a symphony of excitement and entertainment in perfect harmony.
-                    </p>
+                    </p> -->
                 </div>
 
                 <div class="col-sm-6 col-lg-3" align="center">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2023 at 04:13 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 28, 2023 at 06:10 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `onlineorderingsystem`
+-- Database: `crud_db`
 --
 
 -- --------------------------------------------------------
@@ -47,31 +47,31 @@ CREATE TABLE `tblinventory` (
 --
 
 INSERT INTO `tblinventory` (`productID`, `photo`, `productName`, `type`, `category`, `subcategory`, `price`, `itemsold`, `quantity`, `itemdesc1`, `itemdesc2`, `itemdesc3`) VALUES
-(1, 'honda civic hatch.png', 'Honda Civic Type R', 'Hot', 'Cars', 'Honda', 2500000, 1, 24, 'Sporty and stylish hatchback', 'Super Fast Honda Variant', 'Iconic Honda Civic variant'),
-(2, 'nissan skyline blue.png', 'Nissan Skyline GTR R34 V spec', 'Hot', 'Cars', 'Nissan', 3000000, 1, 365, 'Classic blue powerhouse', 'Legendary Skyline performance', 'Refined GTR V-Spec model'),
-(3, 'nissan 180sx.png', 'Nissan 180sx Type X', 'Hot', 'Cars', 'Nissan', 800000, 0, 197, 'Sleek drift-ready coupe', 'Stylish Nissan sports car', 'Affordable performance option'),
-(4, 'nissan r34 black.png', 'Nissan Skyline R34 GTR M-Spec S Tune', 'Hot', 'Cars', 'Nissan', 3500000, 1, 480, 'Black beauty with power', 'Limited edition Skyline GTR', 'M-Spec performance enhancements'),
-(5, 'mazda rx7 veilside.png', 'Mazda Rx7 Veilside', 'Hot', 'Cars', 'Mazda', 2500000, 1, 332, 'Stunning Veilside body kit', 'Rotary-powered Japanese legend', 'Head-turning sports coupe'),
-(6, 'lancer evo final edition.png', 'Lancer Evolution Final Edition', 'Hot', 'Cars', 'Lancer', 2000000, 0, 385, 'Last of the Evo series', 'Rally-bred performance sedan', 'Impressive handling and power'),
-(7, 'subaru impreza sti black.png', 'Subaru Impreza STI', 'Hot', 'Cars', 'Subaru', 2000000, 0, 52, 'Iconic Subaru performance sedan', 'Aggressive styling, AWD capability', 'Turbocharged rally heritage'),
-(8, 'nissan skyline white.png', 'Nissan Skyline GTR R34', 'Hot', 'Cars', 'Nissan', 2500000, 3, 214, 'JDM Masterpiece', 'Legendary Skyline performance', 'Classic Godzilla'),
-(9, 'nissan skyline red.png', 'Nissan Skyline GTR R33', 'Hot', 'Cars', 'Nissan', 2000000, 0, 374, 'Classic red GTR variant', 'Powerful Skyline heritage', 'Driver-focused performance'),
-(10, 'nissan silvia blue.png', 'Nissan Silvia S15', 'Hot', 'Cars', 'Nissan', 1500000, 0, 496, 'Stylish blue Silvia coupe', 'Drift-friendly sports car', 'Affordable performance option'),
-(11, 'nissan silvia s15.png', 'Nissan Silvia S15 Spec R', 'Hot', 'Cars', 'Nissan', 1800000, 4, 284, 'High-performance Silvia variant', 'Spec R model highlights', 'Exciting rear-wheel-drive experience'),
-(12, 'mazda rx7 white.png', 'Mazda Rx7 White', 'Hot', 'Cars', 'Mazda', 2000000, 0, 482, 'Clean white Rx7 beauty', 'Iconic rotary-powered sports car', 'Striking design and performance'),
-(13, 'subaru impreza white.png', 'Subaru Impreza', 'Hot', 'Cars', 'Subaru', 1500000, 0, 381, 'Elegant white Impreza sedan', 'All-wheel-drive versatility', 'Reliable and practical choice'),
-(14, 'nissan sileighty.png', 'Nissan Sileighty', 'Hot', 'Cars', 'Nissan', 1000000, 0, 0, 'Unique Sileighty conversion', 'Silvia and 180sx hybrid', 'Drift-ready street machine'),
-(15, 'toyota supra mk4.png', 'Toyota Supra MK4', 'Hot', 'Cars', 'Toyota', 2500000, 1, 278, 'Classic Supra sports car', 'Timeless design, iconic name', 'Turbocharged performance beast'),
-(16, 'honda civic.png', 'Honda Civic', 'New', 'Cars', 'Honda', 1100000, 1, 247, 'Stylish and reliable sedan', 'Efficient performance and features', 'Modern design and technology'),
-(17, 'toyota vios.png', 'Toyota Vios', 'New', 'Cars', 'Toyota', 800000, 0, 365, 'Affordable and practical choice', 'Fuel-efficient and spacious sedan', 'Trusted Toyota reliability'),
-(18, 'hyundai elantra.png', 'Hyundai Elantra', 'New', 'Cars', 'Hyundai', 1000000, 0, 478, 'Sleek and sophisticated design', 'Comfortable and well-equipped sedan', 'Advanced safety features'),
-(19, 'mitsubishi mirage.png', 'Mitsubishi Mirage', 'New', 'Cars', 'Mitsubishi', 700000, 0, 42, 'Compact and economical hatchback', 'Great fuel efficiency', 'Easy maneuverability and affordability'),
-(20, 'honda jazz.png', 'Honda Jazz', 'New', 'Cars', 'Honda', 1000000, 0, 56, 'Versatile and spacious hatchback', 'Fun-to-drive and efficient', 'Innovative interior features'),
-(21, 'honda city.png', 'Honda City', 'New', 'Cars', 'Honda', 900000, 0, 24, 'Reliable and practical sedan', 'Comfortable and spacious cabin', 'Good fuel efficiency and safety'),
-(22, 'suzuki jimny.png', 'Suzuki Jimny', 'New', 'Cars', 'Suzuki', 1000000, 0, 468, 'Compact and capable off-roader', 'Iconic design and ruggedness', 'Nimble and adventurous'),
-(23, 'toyota raize.png', 'Toyota Raize', 'New', 'Cars', 'Toyota', 900000, 0, 327, 'Stylish and compact SUV', 'Fuel-efficient and agile', 'Versatile and modern features'),
-(24, 'ford ranger.png', 'Ford Ranger', 'New', 'Cars', 'Ford', 1100000, 0, 169, 'Tough and powerful pickup truck', 'Reliable and capable off-road', 'Spacious and comfortable cabin'),
-(25, 'ford everest.png', 'Ford Everest', 'New', 'Cars', 'Ford', 1600000, 0, 0, 'Robust and versatile SUV', 'Excellent off-road capability', 'Comfortable and family-friendly'),
+(1, 'honda civic hatch.png', 'Honda Civic Type R', 'Hot', 'Cars', '', 2500000, 1, 24, 'Sporty and stylish hatchback', 'Super Fast Honda Variant', 'Iconic Honda Civic variant'),
+(2, 'nissan skyline blue.png', 'Nissan Skyline GTR R34 V spec', 'Hot', 'Cars', '', 3000000, 1, 365, 'Classic blue powerhouse', 'Legendary Skyline performance', 'Refined GTR V-Spec model'),
+(3, 'nissan 180sx.png', 'Nissan 180sx Type X', 'Hot', 'Cars', '', 800000, 0, 197, 'Sleek drift-ready coupe', 'Stylish Nissan sports car', 'Affordable performance option'),
+(4, 'nissan r34 black.png', 'Nissan Skyline R34 GTR M-Spec S Tune', 'Hot', 'Cars', '', 3500000, 1, 480, 'Black beauty with power', 'Limited edition Skyline GTR', 'M-Spec performance enhancements'),
+(5, 'mazda rx7 veilside.png', 'Mazda Rx7 Veilside', 'Hot', 'Cars', '', 2500000, 1, 332, 'Stunning Veilside body kit', 'Rotary-powered Japanese legend', 'Head-turning sports coupe'),
+(6, 'lancer evo final edition.png', 'Lancer Evolution Final Edition', 'Hot', 'Cars', '', 2000000, 0, 385, 'Last of the Evo series', 'Rally-bred performance sedan', 'Impressive handling and power'),
+(7, 'subaru impreza sti black.png', 'Subaru Impreza STI', 'Hot', 'Cars', '', 2000000, 0, 52, 'Iconic Subaru performance sedan', 'Aggressive styling, AWD capability', 'Turbocharged rally heritage'),
+(8, 'nissan skyline white.png', 'Nissan Skyline GTR R34', 'Hot', 'Cars', '', 2500000, 3, 214, 'JDM Masterpiece', 'Legendary Skyline performance', 'Classic Godzilla'),
+(9, 'nissan skyline red.png', 'Nissan Skyline GTR R33', 'Hot', 'Cars', '', 2000000, 0, 374, 'Classic red GTR variant', 'Powerful Skyline heritage', 'Driver-focused performance'),
+(10, 'nissan silvia blue.png', 'Nissan Silvia S15', 'Hot', 'Cars', '', 1500000, 0, 496, 'Stylish blue Silvia coupe', 'Drift-friendly sports car', 'Affordable performance option'),
+(11, 'nissan silvia s15.png', 'Nissan Silvia S15 Spec R', 'Hot', 'Cars', '', 1800000, 4, 284, 'High-performance Silvia variant', 'Spec R model highlights', 'Exciting rear-wheel-drive experience'),
+(12, 'mazda rx7 white.png', 'Mazda Rx7 White', 'Hot', 'Cars', '', 2000000, 0, 482, 'Clean white Rx7 beauty', 'Iconic rotary-powered sports car', 'Striking design and performance'),
+(13, 'subaru impreza white.png', 'Subaru Impreza', 'Hot', 'Cars', '', 1500000, 0, 381, 'Elegant white Impreza sedan', 'All-wheel-drive versatility', 'Reliable and practical choice'),
+(14, 'nissan sileighty.png', 'Nissan Sileighty', 'Hot', 'Cars', '', 1000000, 0, 0, 'Unique Sileighty conversion', 'Silvia and 180sx hybrid', 'Drift-ready street machine'),
+(15, 'toyota supra mk4.png', 'Toyota Supra MK4', 'Hot', 'Cars', '', 2500000, 1, 278, 'Classic Supra sports car', 'Timeless design, iconic name', 'Turbocharged performance beast'),
+(16, 'honda civic.png', 'Honda Civic', 'New', 'Cars', '', 1100000, 1, 247, 'Stylish and reliable sedan', 'Efficient performance and features', 'Modern design and technology'),
+(17, 'toyota vios.png', 'Toyota Vios', 'New', 'Cars', '', 800000, 0, 365, 'Affordable and practical choice', 'Fuel-efficient and spacious sedan', 'Trusted Toyota reliability'),
+(18, 'hyundai elantra.png', 'Hyundai Elantra', 'New', 'Cars', '', 1000000, 0, 478, 'Sleek and sophisticated design', 'Comfortable and well-equipped sedan', 'Advanced safety features'),
+(19, 'mitsubishi mirage.png', 'Mitsubishi Mirage', 'New', 'Cars', '', 700000, 0, 42, 'Compact and economical hatchback', 'Great fuel efficiency', 'Easy maneuverability and affordability'),
+(20, 'honda jazz.png', 'Honda Jazz', 'New', 'Cars', '', 1000000, 0, 56, 'Versatile and spacious hatchback', 'Fun-to-drive and efficient', 'Innovative interior features'),
+(21, 'honda city.png', 'Honda City', 'New', 'Cars', '', 900000, 0, 24, 'Reliable and practical sedan', 'Comfortable and spacious cabin', 'Good fuel efficiency and safety'),
+(22, 'suzuki jimny.png', 'Suzuki Jimny', 'New', 'Cars', '', 1000000, 0, 468, 'Compact and capable off-roader', 'Iconic design and ruggedness', 'Nimble and adventurous'),
+(23, 'toyota raize.png', 'Toyota Raize', 'New', 'Cars', '', 900000, 0, 327, 'Stylish and compact SUV', 'Fuel-efficient and agile', 'Versatile and modern features'),
+(24, 'ford ranger.png', 'Ford Ranger', 'New', 'Cars', '', 1100000, 0, 169, 'Tough and powerful pickup truck', 'Reliable and capable off-road', 'Spacious and comfortable cabin'),
+(25, 'ford everest.png', 'Ford Everest', 'New', 'Cars', '', 1600000, 0, 0, 'Robust and versatile SUV', 'Excellent off-road capability', 'Comfortable and family-friendly'),
 (26, 'toyota fortuner.png', 'Toyota Fortuner', 'New', 'Cars', '', 1500000, 1, 211, 'Stylish and rugged SUV', 'Powerful performance and towing capacity', 'Advanced safety features'),
 (27, 'montero sport.png', 'Mitsubishi Montero Sports', 'New', 'Cars', '', 1600000, 1, 135, 'Sporty and capable SUV', 'Comfortable and spacious interior', 'Strong performance and off-road capability'),
 (31, 'Anime Girl Keychain.png', 'Anime Girl Keychain', 'Best', 'Merch', '', 500, 3, 394, 'Cute anime accessory', 'Keychain merchandise', 'Anime-themed collectible'),
@@ -193,7 +193,6 @@ CREATE TABLE `tbluser` (
   `photo` varchar(100) NOT NULL,
   `Firstname` char(100) NOT NULL,
   `Lastname` char(100) NOT NULL,
-  `Surname` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `HouseNo` int(11) NOT NULL,
@@ -210,16 +209,14 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`userID`, `photo`, `Firstname`, `Lastname`, `Surname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES
-(1, 'id picture.jpg', 'Jerico', 'Daag', '', 'daageco@gmail.com', '123456', 4, 'Sunflower Drive', 'Sto Domingo', 'Angeles City', 'Pampanga', '+639270416057', 'offline.png', 'Admin'),
-(2, 'andrei.jpg', 'Andrei', 'Agbisit', '', 'agbisit.andrei@auf.edu.ph', '123456', 52, ' Stones ', 'Friendship ', 'Angeles City ', 'Pampanga ', '+639512342412', 'offline.png', 'Admin'),
-(3, 'derick.jpg', 'Derick', 'Pangilinan', '', 'pangilinan.derick@auf.edu.ph', '123456', 86, ' Jollibee ', 'Central Town  ', 'Angeles City  ', 'Pampanga  ', '+639513431242', 'offline.png', 'User'),
-(4, 'cristan.jpg', 'Cristan', 'Nuguid', '', 'nuguid.cristan@auf.edu.ph', '123456', 34, ' Kensington Road ', 'Balibago', 'Angeles City ', 'Pampanga ', '+639123512452', 'offline.png', 'User'),
-(5, 'tyler durden.jpg', 'azi', 'boy', '', 'testuser@gmail.com', '12345', 426, ' 1231 ', '31 ', 'Angeles City ', 'Pampanga ', '+634324112341', 'offline.png', 'User'),
-(6, 'default.png', 'Tyler', 'Durden', '', 'tylerdurden@gmail.com', '12345', 87, ' Sampaguita ', 'Sto Tomas ', 'Angeles ', 'Pampanga ', '+639235213421', 'offline.png', 'User'),
-(19, 'psj.jpg', 'Jerico', 'Daag', '', 'jericodaag@gmail.com', '123456', 426, ' sunflower ', 'dr ', 'Angeles ', 'Pampanga ', '+639234235231', 'offline.png', 'User'),
-(20, 'default.png', 'Khoo', 'Pin', '', 'khoochunpin@gmail.com', '123456', 20, ' Lorong Lasksamana 5B, Taman Kintaman ', '41200 ', 'Klang ', 'selangor ', '+631110060970', 'offline.png', 'User'),
-(30, 'default.png', 'Khoo', 'Pin', 'Khoo_ben', 'khoochunping@gmail.com', '123456', 0, '', '', '', '', '', 'online.png', 'User');
+INSERT INTO `tbluser` (`userID`, `photo`, `Firstname`, `Lastname`, `email`, `Password`, `HouseNo`, `Street`, `Brgy`, `City`, `Province`, `phone`, `status`, `Access`) VALUES
+(1, 'id picture.jpg', 'Jerico', 'Daag', 'daageco@gmail.com', '123456', 4, 'Sunflower Drive', 'Sto Domingo', 'Angeles City', 'Pampanga', '+639270416057', 'offline.png', 'Admin'),
+(2, 'andrei.jpg', 'Andrei', 'Agbisit', 'agbisit.andrei@auf.edu.ph', '123456', 52, ' Stones ', 'Friendship ', 'Angeles City ', 'Pampanga ', '+639512342412', 'offline.png', 'Admin'),
+(3, 'derick.jpg', 'Derick', 'Pangilinan', 'pangilinan.derick@auf.edu.ph', '123456', 86, ' Jollibee ', 'Central Town  ', 'Angeles City  ', 'Pampanga  ', '+639513431242', 'offline.png', 'User'),
+(4, 'cristan.jpg', 'Cristan', 'Nuguid', 'nuguid.cristan@auf.edu.ph', '123456', 34, ' Kensington Road ', 'Balibago', 'Angeles City ', 'Pampanga ', '+639123512452', 'offline.png', 'User'),
+(5, 'tyler durden.jpg', 'azi', 'boy', 'testuser@gmail.com', '12345', 426, ' 1231 ', '31 ', 'Angeles City ', 'Pampanga ', '+634324112341', 'offline.png', 'User'),
+(6, 'default.png', 'Tyler', 'Durden', 'tylerdurden@gmail.com', '12345', 87, ' Sampaguita ', 'Sto Tomas ', 'Angeles ', 'Pampanga ', '+639235213421', 'offline.png', 'User'),
+(19, 'psj.jpg', 'Jerico', 'Daag', 'jericodaag@gmail.com', '123456', 426, ' sunflower ', 'dr ', 'Angeles ', 'Pampanga ', '+639234235231', 'offline.png', 'User');
 
 --
 -- Indexes for dumped tables
@@ -257,15 +254,16 @@ ALTER TABLE `tblinventory`
 -- AUTO_INCREMENT for table `tbltransaction`
 --
 ALTER TABLE `tbltransaction`
-  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `transactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

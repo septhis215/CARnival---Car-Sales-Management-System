@@ -3,7 +3,7 @@
         $host = "localhost";
         $username = "root";
         $password = "";
-        $database = "onlineorderingsystem";
+        $database = "csms_db";
 
         $con = new mysqli($host, $username, $password, $database); 
         if($con->connect_error){

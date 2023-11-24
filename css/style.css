@@ -61,8 +61,8 @@ body {
 }
 
 nav {
-    box-shadow: 0px 8px 16px 0px rgb(219, 4, 4);
-    background-color: goldenrod;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    background-color: black;
 }
 
 .btn {
@@ -73,7 +73,7 @@ nav {
 .navbar-brand,
 .nav-link,
 .fa-bars {
-    color: black;
+    color: gold;
     font-family: "Valorant Font";
     font-size: 1.1rem;
 }
@@ -96,7 +96,7 @@ nav {
 
 .navbar-brand:hover,
 .nav-link:hover {
-    color: #f40428;
+    color: #ff4747;
 }
 
 .cart-button {
@@ -112,7 +112,7 @@ nav {
     right: 10px;
     width: 15px;
     height: 15px;
-    background-color: #f40428;
+    background-color: red;
     border-radius: 50%;
     opacity: 1;
 }
@@ -130,7 +130,7 @@ nav {
     right: 0px;
     width: 15px;
     height: 15px;
-    background-color: #f40428;
+    background-color: red;
     border-radius: 50%;
     opacity: 1;
 }
@@ -214,7 +214,7 @@ input#number {
 }  */
 
 .login-background {
-    background: linear-gradient(rgba(255, 230, 0), rgba(255, 230, 0)), url("../images/background/login-bg.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url("../images/background/login-bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -226,7 +226,7 @@ input#number {
 }
 
 .signup-background {
-    background: linear-gradient(rgb(255, 230, 0), rgba(255, 230, 0)), url("../images/background/signup-bg.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url("../images/background/signup-bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -248,7 +248,7 @@ input#number {
 }
 
 .logo span {
-    color: black;
+    color: gold;
 }
 
 .active-men {
@@ -376,6 +376,7 @@ input#number {
 .display-4 {
     font-family: "A4speed";
     text-align: center;
+    color: gold
 }
 
 .display-cart {
@@ -401,6 +402,7 @@ input#number {
 
 p.lead {
     font-family: "Chocolates";
+    color: gold;
 }
 
 button#select {
@@ -513,14 +515,15 @@ form .btn:hover {
     border-bottom: 1px solid black;
     text-align: center;
     padding-bottom: 50px;
+    color: gold
 }
 
 .header {
-    color: black;
+    color: gold;
     font-family: "Valorant Font";
     font-size: 45px;
     font-weight: 100;
-    background-color: gold;
+    background-color: #000;
     padding: 0px 20px;
 }
 
@@ -546,7 +549,7 @@ form .btn:hover {
 .categories div {
     position: relative;
     text-align: center;
-    color: rgba(0, 0, 0, 0.4);
+    color: rgb(0, 0, 0);
     margin-bottom: 30px;
 }
 
@@ -558,7 +561,7 @@ form .btn:hover {
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     font-family: "Valorant Font";
-    color: white;
+    color: gold;
     padding: 10px;
 }
 
@@ -652,7 +655,7 @@ form .btn:hover {
 
 .fixed-banner {
     width: 100%;
-    color: black;
+    color: white;
 }
 
 .fixed-banner h4 {
@@ -682,20 +685,20 @@ form .btn:hover {
 
 .container,
 .container * {
-    color: black;
+    color: gold;
 }
 
 .footer,
 .footer * {
-    color: black;
+    color: #fff;
 }
 
 .footer {
-    background-color: gold;
-    color: black;
+    background-color: black;
+    color: white;
     padding: 30px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
-    background-color: goldenrod;
+    background-color: black;
     position: sticky;
 }
 
@@ -708,13 +711,13 @@ form .btn:hover {
 }
 
 .footer a {
-    color: black;
+    color: white;
     font-weight: 100;
     text-decoration: none;
 }
 
 .footer a:hover {
-    color: red  ;
+    color: rgb(95, 95, 95);
 }
 
 .footer hr {
@@ -786,6 +789,7 @@ form input[type="password"],
 form input[type="text"] {
     font-family: "Geomatrix";
     color: #000;
+    background-color: white;
 }
 
 
@@ -798,7 +802,7 @@ form input[type="text"] {
 .table-container {
     overflow-y: auto;
     height: fit-content;
-    background-color: goldenrod;
+    background-color: #121212;
     font-family: "Cafe";
 }
 

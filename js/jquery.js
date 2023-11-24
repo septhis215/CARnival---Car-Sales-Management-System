@@ -1,20 +1,20 @@
 // SETTINGS FOR THE ITEM CAROUSEL
 
 
-$(function(){
+$(function() {
     $('.owl-carousel').owlCarousel({
-        loop:false,
-        margin:10,
-        nav:false,
-        responsive:{
-            0:{
-                items:2
+        loop: false,
+        margin: 10,
+        nav: false,
+        responsive: {
+            0: {
+                items: 2
             },
-            800:{
-                items:3
+            800: {
+                items: 3
             },
-            1200:{
-                items:4
+            1200: {
+                items: 4
             }
         }
     });
@@ -27,13 +27,13 @@ $(function(){
 
 // ======================================= LOG IN VALIDATION =======================================
 
-$(function(){
-    $('#inputEmail').on('focusout', function(){
+$(function() {
+    $('#inputEmail').on('focusout', function() {
         if ($('#inputEmail').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Email Address' 
-                },{
+                    message: 'Please Enter Your Email Address'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -49,12 +49,12 @@ $(function(){
         }
     });
 
-    $('#inputPassword').on('focusout', function(){
+    $('#inputPassword').on('focusout', function() {
         if ($('#inputPassword').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Password' 
-                },{
+                    message: 'Please Enter Your Password'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -71,18 +71,18 @@ $(function(){
     });
 
 
-    
+
 
 
     // ======================================= SIGN UP VALIDATION =======================================
 
 
-    $('#signupinputEmail').on('focusout', function(){
+    $('#signupinputEmail').on('focusout', function() {
         if ($('#signupinputEmail').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Email Address' 
-                },{
+                    message: 'Please Enter Your Email Address'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -98,12 +98,12 @@ $(function(){
         }
     });
 
-    $('#signupinputPassword').on('focusout', function(){
+    $('#signupinputPassword').on('focusout', function() {
         if ($('#signupinputPassword').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Password' 
-                },{
+                    message: 'Please Enter Your Password'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -119,13 +119,13 @@ $(function(){
         }
     });
 
-    
-    $('#signupinputFirstname').on('focusout', function(){
+
+    $('#signupinputFirstname').on('focusout', function() {
         if ($('#signupinputFirstname').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Firstname' 
-                },{
+                    message: 'Please Enter Your Firstname'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -141,12 +141,33 @@ $(function(){
         }
     });
 
-    $('#signupinputLastname').on('focusout', function(){
+    $('#signupinputLastname').on('focusout', function() {
         if ($('#signupinputLastname').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Lastname' 
-                },{
+                    message: 'Please Enter Your Lastname'
+                }, {
+                    animate: {
+                        enter: 'animate__animated animate__fadeInDown',
+                        exit: 'animate__animated animate__fadeOutLeft'
+                    },
+                    delay: 2000,
+                    placement: {
+                        from: 'bottom',
+                        align: 'left'
+                    },
+                    type: 'warning'
+                });
+            });
+        }
+    });
+
+    $('#signupinputSurname').on('focusout', function() {
+        if ($('#signupinputSurname').val().length == 0) {
+            $(function() {
+                $.notify({
+                    message: 'Please Enter Your Surname'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -163,12 +184,12 @@ $(function(){
     });
 
 
-    $('#signupinputContactNumber').on('focusout', function(){
+    $('#signupinputContactNumber').on('focusout', function() {
         if ($('#signupinputContactNumber').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Contact Number' 
-                },{
+                    message: 'Please Enter Your Contact Number'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -181,14 +202,11 @@ $(function(){
                     type: 'warning'
                 });
             });
-        }
-
-
-        else if ($('#signupinputContactNumber').val().length < 10) {
+        } else if ($('#signupinputContactNumber').val().length < 10) {
             $(function() {
                 $.notify({
-                    message: 'Your Contact Number Has Some Missing Numbers, Recheck It' 
-                },{
+                    message: 'Your Contact Number Has Some Missing Numbers, Recheck It'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -204,12 +222,12 @@ $(function(){
         }
     });
 
-    $('#signupinputHouseNumber').on('focusout', function(){
+    $('#signupinputHouseNumber').on('focusout', function() {
         if ($('#signupinputHouseNumber').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your House Number' 
-                },{
+                    message: 'Please Enter Your House Number'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -225,12 +243,12 @@ $(function(){
         }
     });
 
-    $('#signupinputStreet').on('focusout', function(){
+    $('#signupinputStreet').on('focusout', function() {
         if ($('#signupinputStreet').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Street Location' 
-                },{
+                    message: 'Please Enter Your Street Location'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -247,12 +265,12 @@ $(function(){
     });
 
 
-    $('#signupinputBarangay').on('focusout', function(){
+    $('#signupinputBarangay').on('focusout', function() {
         if ($('#signupinputBarangay').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Barangay Location' 
-                },{
+                    message: 'Please Enter Your Barangay Location'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -267,13 +285,13 @@ $(function(){
             });
         }
     });
-    
-    $('#signupinputCity').on('focusout', function(){
+
+    $('#signupinputCity').on('focusout', function() {
         if ($('#signupinputCity').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your City Location' 
-                },{
+                    message: 'Please Enter Your City Location'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -290,12 +308,12 @@ $(function(){
     });
 
 
-    $('#signupinputProvince').on('focusout', function(){
+    $('#signupinputProvince').on('focusout', function() {
         if ($('#signupinputProvince').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Enter Your Province Location' 
-                },{
+                    message: 'Please Enter Your Province Location'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -315,12 +333,12 @@ $(function(){
 
     // ======================================= ACCOUNTS VALIDATION =======================================
 
-    $('#accountsinputFirstname').on('focusout', function(){
+    $('#accountsinputFirstname').on('focusout', function() {
         if ($('#accountsinputFirstname').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Specify The Firstname Of The Account Holder' 
-                },{
+                    message: 'Please Specify The Firstname Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -337,12 +355,33 @@ $(function(){
     });
 
 
-    $('#accountsinputLastname').on('focusout', function(){
+    $('#accountsinputLastname').on('focusout', function() {
         if ($('#accountsinputLastname').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Specify The Lastname Of The Account Holder' 
-                },{
+                    message: 'Please Specify The Lastname Of The Account Holder'
+                }, {
+                    animate: {
+                        enter: 'animate__animated animate__fadeInDown',
+                        exit: 'animate__animated animate__fadeOutLeft'
+                    },
+                    delay: 2000,
+                    placement: {
+                        from: 'bottom',
+                        align: 'left'
+                    },
+                    type: 'warning'
+                });
+            });
+        }
+    });
+
+    $('#accountsinputSurname').on('focusout', function() {
+        if ($('#accountsinputSurname').val().length == 0) {
+            $(function() {
+                $.notify({
+                    message: 'Please Specify The Surname Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -360,12 +399,12 @@ $(function(){
 
 
 
-    $('#accountsinputEmail').on('focusout', function(){
+    $('#accountsinputEmail').on('focusout', function() {
         if ($('#accountsinputEmail').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Specify The Email Address Of The Account Holder' 
-                },{
+                    message: 'Please Specify The Email Address Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -382,12 +421,12 @@ $(function(){
     });
 
 
-    $('#accountsinputPassword').on('focusout', function(){
+    $('#accountsinputPassword').on('focusout', function() {
         if ($('#accountsinputPassword').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Specify The Password Of The Account Holder' 
-                },{
+                    message: 'Please Specify The Password Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -405,12 +444,12 @@ $(function(){
 
 
 
-    $('#accountsinputContactNumber').on('focusout', function(){
+    $('#accountsinputContactNumber').on('focusout', function() {
         if ($('#accountsinputContactNumber').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The Contact Number Of The Account Holder' 
-                },{
+                    message: 'Please Include The Contact Number Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -423,12 +462,11 @@ $(function(){
                     type: 'warning'
                 });
             });
-        }
-        else if ($('#accountsinputContactNumber').val().length < 10) {
+        } else if ($('#accountsinputContactNumber').val().length < 10) {
             $(function() {
                 $.notify({
-                    message: 'The Contact Number You Entered Is Incorrect' 
-                },{
+                    message: 'The Contact Number You Entered Is Incorrect'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -446,12 +484,12 @@ $(function(){
 
 
 
-    $('#accountsinputHouseNumber').on('focusout', function(){
+    $('#accountsinputHouseNumber').on('focusout', function() {
         if ($('#accountsinputHouseNumber').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The House Number Of The Account Holder' 
-                },{
+                    message: 'Please Include The House Number Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -468,12 +506,12 @@ $(function(){
     });
 
 
-    $('#accountsinputStreet').on('focusout', function(){
+    $('#accountsinputStreet').on('focusout', function() {
         if ($('#accountsinputStreet').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The Street Location Of The Account Holder' 
-                },{
+                    message: 'Please Include The Street Location Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -491,12 +529,12 @@ $(function(){
 
 
 
-    $('#accountsinputBarangay').on('focusout', function(){
+    $('#accountsinputBarangay').on('focusout', function() {
         if ($('#accountsinputBarangay').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The Barangay Location Of The Account Holder' 
-                },{
+                    message: 'Please Include The Barangay Location Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -511,16 +549,16 @@ $(function(){
             });
         }
     });
-    
-    
 
 
-    $('#accountsinputCity').on('focusout', function(){
+
+
+    $('#accountsinputCity').on('focusout', function() {
         if ($('#accountsinputCity').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The City Location Of The Account Holder' 
-                },{
+                    message: 'Please Include The City Location Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -535,16 +573,16 @@ $(function(){
             });
         }
     });
-    
 
 
 
-    $('#accountsinputProvince').on('focusout', function(){
+
+    $('#accountsinputProvince').on('focusout', function() {
         if ($('#accountsinputProvince').val().length == 0) {
             $(function() {
                 $.notify({
-                    message: 'Please Include The Province Location Of The Account Holder' 
-                },{
+                    message: 'Please Include The Province Location Of The Account Holder'
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -559,19 +597,19 @@ $(function(){
             });
         }
     });
-    
-    
+
+
 
 
     // ======================================= INVENTORY VALIDATION =======================================
-    
-    
-    $('#productname').on('focusout', function(){
+
+
+    $('#productname').on('focusout', function() {
         if ($('#productname').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Product Name Should Not Be Empty'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -586,14 +624,14 @@ $(function(){
             });
         }
     });
-    
 
-    $('#price').on('focusout', function(){
+
+    $('#price').on('focusout', function() {
         if ($('#price').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Please Specify The Price Of The Product'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -610,12 +648,12 @@ $(function(){
     });
 
 
-    $('#quantity').on('focusout', function(){
+    $('#quantity').on('focusout', function() {
         if ($('#quantity').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Please Specify The Quantity Of The Product'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -632,12 +670,12 @@ $(function(){
     });
 
 
-    $('#productdesc1').on('focusout', function(){
+    $('#productdesc1').on('focusout', function() {
         if ($('#productdesc1').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Please Include Some Descriptions For The Product'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -653,12 +691,12 @@ $(function(){
         }
     });
 
-    $('#productdesc2').on('focusout', function(){
+    $('#productdesc2').on('focusout', function() {
         if ($('#productdesc2').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Please Include Some Descriptions For The Product'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -674,12 +712,12 @@ $(function(){
         }
     });
 
-    $('#productdesc3').on('focusout', function(){
+    $('#productdesc3').on('focusout', function() {
         if ($('#productdesc3').val().length == 0) {
             $(function() {
                 $.notify({
                     message: 'Please Include Some Descriptions For The Product'
-                },{
+                }, {
                     animate: {
                         enter: 'animate__animated animate__fadeInDown',
                         exit: 'animate__animated animate__fadeOutLeft'
@@ -695,5 +733,5 @@ $(function(){
         }
     });
 
-    
+
 });

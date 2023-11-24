@@ -11,33 +11,41 @@ $con=connect();
         $id=0;
         $fname = "";
         $lname = "";
-        $surname = "";
-        $email = "";
+        $username = "";
         $password = "";
-        $address = "";
+        $email = "";
         $phone = "";
+        $address = "";
         $signup=false;
         $payment=false;
         $cod=false;
- 
-         
-        $sql = "SELECT * FROM tbluser";
+
+        
+        $sql = "SELECT * FROM users";
         $users = $con->query($sql) or die ($con->error);
         $row = $users->fetch_assoc();
 
-        $sql = "SELECT * FROM tblinventory order by rand() LIMIT 12 ";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` order by rand() LIMIT 12 ";
         $items1 = $con->query($sql) or die ($con->error);
 
-        $sql = "SELECT * FROM tblinventory order by rand() LIMIT 12";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` order by rand() LIMIT 12";
         $items2 = $con->query($sql) or die ($con->error);
 
-        $sql = "SELECT * FROM tblinventory order by rand() LIMIT 12";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` order by rand() LIMIT 12";
         $items3 = $con->query($sql) or die ($con->error);
 
-        $sql=  "SELECT * FROM tbltransaction";
+        $sql=  "SELECT * FROM transaction_list";
         $transaction = $con->query($sql) or die ($con->error);
 
-        $sql = "SELECT * FROM tblinventory";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`";
         $pr = $con->query($sql) or die ($con->error);
         $row = $pr->fetch_assoc();
         
@@ -47,18 +55,26 @@ $con=connect();
                 echo header("Location:home.php");
             }
            
-            $sql = "SELECT * FROM tblinventory WHERE `productName` like '%$searchkey%' OR `type` like '%$searchkey%' OR `category` like '%$searchkey%' OR `subcategory` like '%$searchkey%' OR `itemdesc1` like '%$searchkey%' OR `itemdesc2` like '%$searchkey%' OR `itemdesc2` like '%$searchkey%'";
+            $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+            INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+            INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` 
+            WHERE (`model` like '%$searchkey%' OR `colors` like '%$searchkey%' OR `engineType` like '%$searchkey%' OR `transmissionType` like '%$searchkey%' OR `description` like '%$searchkey%' OR `manufacturerName` like '%$searchkey%' OR `variant` like '%$searchkey%' OR `carTypeName` like '%$searchkey%') AND `inventory`.`status`='0'";
             $product = $con->query($sql) or die ($con->error);
 
     
-            $sql = "SELECT COUNT(productID) AS 'found' FROM tblinventory WHERE `productName` like '%$searchkey%' OR `type` like '%$searchkey%'  OR `category` like '%$searchkey%' OR `subcategory` like '%$searchkey%' OR `itemdesc1` like '%$searchkey%' OR `itemdesc2` like '%$searchkey%' OR `itemdesc2` like '%$searchkey%'";
+            $sql = "SELECT COUNT(inventoryID) AS 'found' FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+            INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+            INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` 
+            WHERE (`model` like '%$searchkey%' OR `colors` like '%$searchkey%' OR `engineType` like '%$searchkey%' OR `transmissionType` like '%$searchkey%' OR `description` like '%$searchkey%' OR `manufacturerName` like '%$searchkey%' OR `variant` like '%$searchkey%' OR `carTypeName` like '%$searchkey%') AND `inventory`.`status`='0'";
             $s = $con->query($sql) or die ($con->error);
             $result=mysqli_fetch_array($s);
             $found=$result['found'];
           
         }
         else{
-          $sql = "SELECT * FROM tblinventory";
+          $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+          INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+          INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID`";
           $searchkey="";
         }
 
@@ -66,7 +82,7 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     $signup=true;
     $user=$_SESSION['ID'];
     
-    $sql="SELECT COUNT(tbltransaction.`transactionID`) AS 'NOTIF' FROM `tbltransaction` INNER JOIN `tbluser` ON `tbltransaction`.`userID`=`tbluser`.`userID` WHERE tbltransaction.`Status`='Added to cart' AND tbltransaction.`userID`='$user'";
+    $sql="SELECT COUNT(transaction_list.`id`) AS 'NOTIF' FROM `transaction_list` INNER JOIN `customer` ON `transaction_list`.`custID`=`customer`.`custID` WHERE transaction_list.`Status`='Added to cart' AND transaction_list.`custID`='$user'";
     $cart = $con->query($sql) or die ($con->error);
     $notif = mysqli_fetch_assoc($cart);
     $count=$notif['NOTIF'];
@@ -78,16 +94,28 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
     if(isset($_GET['select'])){
         $ID=$_GET['select'];
 
-        $sql = "SELECT * FROM tblinventory where productID=$ID";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+        INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+        INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` where `inventory`.`status`='0' AND inventoryID=$ID";
         $pic = $con->query($sql) or die ($con->error);
         $row = $pic->fetch_assoc();
-        $img=$row['photo'];
-        $prodname=$row['productName'];
+
+        $vr_number=$row['vr_number'];
+        $variant=$row['variant'];
+        $colors=$row['colors'];
+        $engine=$row['engine_number'];
+        $chasis=$row['chasis_number'];
+        $prodname=$row['model'];
         $price=$row['price'];
-        $left=$row['quantity'];
-        $desc1=$row['itemdesc1'];
-        $desc2=$row['itemdesc2'];
-        $desc3=$row['itemdesc3'];
+        $img=$row['photo'];
+
+        $sql1 = "SELECT * FROM users";
+        $pic1 = $con->query($sql1) or die ($con->error);
+        $row1 = $pic1->fetch_assoc();
+        $firstname=$row1["firstname"];
+        $lastname=$row1["lastname"];
+        $levelID=$row1["levelID"];
+
 
 
         if(isset($_POST['add'])){
@@ -100,7 +128,6 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
             $id=$_SESSION['ID'];
             $fname=$_SESSION['firstname'];
             $lname=$_SESSION['lastname'];
-            $surname=$_SESSION['surname'];
             date_default_timezone_set('Asia/Manila');
             $time=date("h:i a");
             $photo=$_POST['photo'];
@@ -187,7 +214,6 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
             $id=$_SESSION['ID'];
             $fname=$_SESSION['firstname'];
             $lname=$_SESSION['lastname'];
-            $surname=$_SESSION['surname'];
             date_default_timezone_set('Asia/Manila');
             $time=date("h:i a");
             $photo=$_POST['photo'];
@@ -274,7 +300,6 @@ if(isset($_SESSION['UserLogIn'])&&($_SESSION['Access']=="User")){
             $id=$_SESSION['ID'];
             $fname=$_SESSION['firstname'];
             $lname=$_SESSION['lastname'];
-            $surname=$_SESSION['surname'];
             date_default_timezone_set('Asia/Manila');
             $time=date("h:i a");
             $photo=$_POST['photo'];
@@ -366,16 +391,28 @@ else{
 
         $ID=$_GET['select'];
 
-        $sql = "SELECT * FROM tblinventory where productID=$ID";
+        $sql = "SELECT * FROM `inventory` INNER JOIN `carmodel` ON `inventory`.`modelID` = `carmodel`.`modelID` 
+                INNER JOIN manufacturers ON `carmodel`.`manufacturerID` = `manufacturers`.`manufacturerID`
+                INNER JOIN cartype ON `carmodel`.`carTypeID` = `cartype`.`carTypeID` where `inventory`.`status`='0' AND inventoryID=$ID";
         $pic = $con->query($sql) or die ($con->error);
         $row = $pic->fetch_assoc();
-        $img=$row['photo'];
-        $prodname=$row['productName'];
+        $vr_number=$row['vr_number'];
+        $variant=$row['variant'];
+        $colors=$row['colors'];
+        $engine=$row['engine_number'];
+        $chasis=$row['chasis_number'];
+        $desc=$row['description'];
+        $prodname=$row['model'];
         $price=$row['price'];
-        $left=$row['quantity'];
-        $desc1=$row['itemdesc1'];
-        $desc2=$row['itemdesc2'];
-        $desc3=$row['itemdesc3'];
+        $img=$row['photo'];
+
+        $sql1 = "SELECT * FROM users";
+        $pic1 = $con->query($sql1) or die ($con->error);
+        $row1 = $pic1->fetch_assoc();
+        $firstname=$row1["firstname"];
+        $lastname=$row1["lastname"];
+        $levelID=$row1["levelID"];
+
 
 
 
@@ -397,7 +434,7 @@ else{
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARnival | Autodeals</title>
+    <title>CARnival | Home</title>
     <link rel="shortcut icon" type=image/x-icon href=images/icon.png>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -414,7 +451,7 @@ else{
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap-notify.min.js"></script>
 </head>
-<body onload="document.getElementById('ratings').innerHTML = getRndInteger(50,100)" style="color:#fff; background-color:gold;">
+<body onload="document.getElementById('ratings').innerHTML = getRndInteger(50,100)" style="color:#fff; background-color:black;">
 
 
 
@@ -434,29 +471,29 @@ else{
 
                 <ul class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <ul class="navbar-nav">
+                        <!-- <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a href="cars.php" class="nav-link dropbtn">Cars</a>
-                        <!-- <div class="dropdown-content">
+                        <div class="dropdown-content">
                             <a href="hot-deals.php">Hot Deals</a>
                             <a href="new-arrival.php">New Arrival</a>
                             <a href="jdm-classics.php">Classic Cars</a>
-                        </div> -->
+                        </div>
                     </li>
                 
-                    <!-- <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a href="merchandise.php" class="nav-link dropbtn">Merchandise</a>
                         <div class="dropdown-content">
                             <a href="best-sellers.php">Best Sellers</a>
                             <a href="car-accessories.php">Accessories</a>
                             <a href="jdm-clothing.php">Jdm Clothing</a>
                         </div>
-                    </li> -->
+                    </li>
                 
                     <li class="nav-item dropdown">
                         <a href="about.php" class="nav-link dropbtn">About</a>
                     </li>
-                </ul>
+                </ul> -->
                       
                     <?php } else{ ?>
                         <ul class="navbar-nav">
@@ -479,11 +516,11 @@ else{
                     </li> -->
                 
                     <li class="nav-item dropdown">
-                        <a href="about.php" class="nav-link dropbtn">About</a>
+                        <a href="about.php" class="nav-link dropbtn">About Us</a>
                     </li>
                 </ul>
                     <?php }?>
-                    <?php if($signup==true){?>
+                    <!-- <?php if($signup==true){?>
                         <li class="nav-item" id="account">
                             <div class="navbar-collapse" id="navbar-list-4">
                                 <ul class="navbar-nav ">
@@ -510,17 +547,17 @@ else{
                         <li class="nav-item" id="signup">
                             <a href="sign-up.php"  class="nav-link">Sign Up</a>
                         </li>
-                    <?php }?>
+                    <?php }?> -->
                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
-                        <?php if($count!='0'){?>
+                        <!-- <?php if($count!='0'){?>
                             <style>.cart-button:before {content: "<?php echo $count ?>"}</style>
                         <?php }?>
                         <li class="nav-item" id=name>
-                            <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname'] ?></a>
-                        </li>
+                            <a href="user-account.php"  class="nav-link"><?php echo $_SESSION['surname']?></a>
+                        </li> -->
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a href="LogIn.php" class="nav-link">Login</a>
+                            <a href="/CARnival/csms/admin/login.php" class="nav-link">Login</a>
                         </li>
                     <?php }?>
                 </ul>
@@ -551,8 +588,8 @@ else{
                     </div>
                     <div class="col-sm-12 col-md-6 item-description-frame">
                         <div class="container">
-                            <h1 class="item-description-name"><?php echo $prodname?></h1>
-                            <span class="fa fa-star"></span>
+                            <h1 class="item-description-name"><?php echo $row['manufacturerName']." ".$prodname?></h1>
+                            <!-- <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
@@ -563,10 +600,10 @@ else{
                                 <?php echo $left." items left"?></span>
                             <?php } else{?>
                                 <span style="color: red"><?php echo "Out of stock"?></span> 
-                            <?php }?>
+                            <?php }?> -->
                             <hr>
                            
-                            <h1 class="item-description-price"><?php echo "Php. ".$price.".00"?></h1>
+                            <h1 class="item-description-price"><?php echo "RM" . number_format($row['price'], 0, '', ',')?></h1>
                             <input type=hidden name=photo value="<?php echo $img ?>">
                             <input type=hidden name=prod value="<?php echo $prodname?>">
                             <input type=hidden name=price value="<?php echo $price?>">
@@ -574,58 +611,33 @@ else{
                           
                             <hr>
                             <p class="lead">
-                                &#9679; <?php echo $desc1?> <br>
-                                &#9679; <?php echo $desc2?> <br>
-                                &#9679; <?php echo $desc3?> <br>
+                                &#9679; <?php echo $desc?> <br>
                             </p>
                             
-                            <hr>
-                            <p class="lead">
-                                Estimated Time of Arrival: <br>
-                                To NCR = 2-3 Days <br>
-                                To Luzon = 3-4 Days <br>
-                                To Visayas = 5-6 Days <br>
-                                To Mindanao = 6-7 Days <br>
-                                
-                            </p>
                             <hr>
                             <div class="row text-center">
                                 <div class="col-12 quantity-counter">
-                                    <p class="lead">Quantity: </p>
+                                    <p class="lead">
+                                        <?php if($row['manufacturerID']){ ?>
+                                        <div class="item-description-container" style="text-align:left;"><?php echo "Buying ".$row['manufacturerName']." ".$row['model']." car by contact salesperson below:" ?></div>
+                                        <?php } ?>
+                                    </p>
                                     &emsp;
-                                    <div class="col-md-7 quantity">
-                                        <input type="number" class="form-control text-center lead" name=quan min="0" max="<?php echo $left?>" step="1" value="0" readonly>
-                                    </div>
                                     </div>
                             </div>
-                            <br>
                             
+                            <?php if($levelID){?>
+                                <?php echo "<strong>Salesperson Name:</strong> ".$row1['firstname']." ".$row1['lastname']." <strong>| Contact Number :</strong> ".$row1['phonenumber'] ?>
+                            <?php }?>
+                                
 
-                        <div class="row checkout-express" id=buy>
-                                <div class="col-12">
-                                <button class="btn btn-primary btn-block add" style="border-color:#bf2e2e; background-color:#bf2e2e;" type=submit name=add>Add To Cart <i class="fas fa-cart-plus align-middle"></i></button>
-                                </div>
-                                <div class="col-6">
-                                    <!-- <button class="btn btn-success btn-block" onclick="enablepayment()" type=submit name=buy>Buy Now</button> -->
-                                 </div>
-                        </div>
-                        <hr>
+
+                            
                         
-                            <div class="row" id=payment>
-                                <div class="col-12 ">
-                                    <p class="lead">Payment Methods</p>
-                                </div>
-                                <div class="col-6">
-                                <button class="btn btn-block btn-primary cod" style="border-color:#bf2e2e; background-color:#bf2e2e;" type=submit id="btn-cod" name=cod>Cash On Delivery <i class="fas fa-truck align-middle"></i></button>
-                                </div>
-
-                                <div class="col-6">
-                                 <button class="btn btn-block btn-success ol" type=submit id="btn-express" name=online>Express Payment <i class="fab fa-bitcoin align-middle"></i></button>
-                                </div>
-                            </div>
+                        
                         
                            
-                                    <!-- CASH ON DELIVERY -->
+                            <!-- CASH ON DELIVERY -->
                                     <!-- <div id="cod">
                                     <div class="row">
                                         <div class="col-12 text-center">
@@ -759,10 +771,10 @@ else{
                 </div>
             </div>
           <form method=get>
-                    <div class="search-boxitem">
+                    <div class="search-boxitem" style="color:white;">
                     <input class="search-inputhome" name=searchitem minlength=3 value="<?php $searchkey?>" type="text" placeholder="Search something..">
                      <button class="search-btn"><i class="fas fa-search"></i></button>
-                     <?php if (isset($_SESSION['UserLogIn'])){ ?>
+                     <!-- <?php if (isset($_SESSION['UserLogIn'])){ ?>
                         <a href="cart.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
@@ -770,7 +782,7 @@ else{
                             <a href="LogIn.php" class="nav-link cart-button">
                                 <i class="fas fa-shopping-cart" style="font-size: 25px"></i>
                             </a>
-                            <?php }?>
+                            <?php }?> -->
                     </div>
             </form>
            
@@ -822,24 +834,25 @@ else{
                         <br><br>
                         <div class="item-container">
                             <div class="item-image-container">
-                                <a href="home.php?select=<?php echo $rows['productID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$rows['photo']?>" alt=""></button></a>
-                                     <?php if($rows['category']=="Men"){?>
+                                <a href="home.php?select=<?php echo $rows['inventoryID']?>"><button type=submit name=select id=select><img src="<?php echo "images/products/".$rows['photo']?>" alt=""></button></a>
+                                     <!-- <?php if($rows['category']=="Men"){?>
                                         <div class="shape men"><?php echo "RM".$rows['price']?></div>
                                     <?php } else if($rows['category']=="Merchandise"){?>
                                         <div class="shape about"><?php echo "RM".$rows['price']?></div>
-                                    <?php }?>
+                                    <?php }?> -->
                         
                             </div>
                             
                              <div class="item-description-container" style="color:white;">
-                                    <h5><?php echo $rows['productName']?></h5>
-                                    <p><?php echo $rows['itemdesc1']?></p>
-                                    <span class="fa fa-star"></span>
+                                    <h5><?php echo $rows['manufacturerName']." ".$rows['model']?></h5>
+                                    <!-- <p><?php echo $rows['description']?></p> -->
+                                    <div class="shape men"><?php echo "RM" . number_format($row['price'], 0, '', ',')?></div>
+                                    <!-- <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star-half-alt"></span>
-                                    <label class="quantity-label"><?php echo $rows['quantity']?> Left</label>
+                                    <label class="quantity-label"><?php echo $rows['quantity']?> Left</label> -->
                             </div>
                          </div>
                     </div>
@@ -851,42 +864,78 @@ else{
    
 <?php } else {?>
 
-    <!-- OUR CATEGORIES -->
-    <div class="container" style="color:white;">
+    <!-- CAR TYPE -->
+    <div class="container" style="color:gold;">
         <div class="header-container">
-            <span class="header">Car Categories</span>
+            <span class="header">Car Type</span>
         </div>
         <br><br><br>
         <div class="row text-center categories">
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Ford"><img src="images/products/ford everest.png" alt="Ford Cars"></a>
-                <h4>Ford Cars</h4>
+                <a href="cars.php?carTypeName=Sedan"><img src="images\products\Honda Civic Type R.jpeg" alt="Cars"></a>
+                <h4>Sedan</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Honda"><img src="images/products/honda city.png" alt="Honda Cars"></a>
+                <a href="cars.php?carTypeName=Pickup"><img src="images\products\Nissan Frontier.jpg" alt="Cars"></a>
+                <h4>Pickup</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?carTypeName=MPV"><img src="images\products\Honda Odyssey.jpg" alt="Cars"></a>
+                <h4>MPV</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?carTypeName=Hatchback"><img src="images\products\Mazda2.jpg" alt="Cars"></a>
+                <h4>Hatchback</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?carTypeName=SUV"><img src="images\products\Lexus UX.jpg" alt="Cars"></a>
+                <h4>SUV</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?carTypeName=Coupe"><img src="images\products\Lexus LC.jpg" alt="Cars"></a>
+                <h4>Coupe</h4>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- CAR BRAND -->
+    <div class="container" style="color:gold;">
+        <div class="header-container">
+            <span class="header">Car Brand</span>
+        </div>
+        <br><br><br>
+        <div class="row text-center categories">
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?manufacturerName=Honda"><img src="images/products/Honda CR-V.jpg" alt="Cars"></a>
                 <h4>Honda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Lancer"><img src="images/products/lancer evo 3.png" alt="Lancer Cars"></a>
-                <h4>Lancer Cars</h4>
+                <a href="cars.php?manufacturerName=Lexus"><img src="images/products/Lexus ES.jpg" alt="Cars"></a>
+                <h4>Lexus Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Mazda"><img src="images/products/mazda rx3.png" alt="Mazda Cars"></a>
+                <a href="cars.php?manufacturerName=Mazda"><img src="images/products/Mazda CX-3.jpg" alt="Cars"></a>
                 <h4>Mazda Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Nissan"><img src="images/products/nissan 180sx.png" alt="Nissan Cars"></a>
+                <a href="cars.php?manufacturerName=Nissan"><img src="images/products/Nissan Altima.jpg" alt="Cars"></a>
                 <h4>Nissan Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Subaru"><img src="images/products/subaru impreza white.png" alt="Subaru Cars"></a>
-                <h4>Subaru Cars</h4>
+                <a href="cars.php?manufacturerName=Proton"><img src="images/products/Proton x50.jpg" alt="Cars"></a>
+                <h4>Proton Cars</h4>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
-                <a href="cars.php?subcategory=Toyota"><img src="images/products/toyota raize.png" alt="Toyota Cars"></a>
+                <a href="cars.php?manufacturerName=Perodua"><img src="images/products/Perodua Axia.jpg" alt="Cars"></a>
+                <h4>Perodua Cars</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4 overlay">
+                <a href="cars.php?manufacturerName=Toyota"><img src="images/products/Toyota Camry.jpg" alt="Cars"></a>
                 <h4>Toyota Cars</h4>
             </div>
-
             </div>
         </div>
     </div>
@@ -934,8 +983,8 @@ else{
                 </div>              
             </div>        
         </div>
-    </div>
-    <br><br><br> -->
+    </div> -->
+    <!-- <br><br><br> -->
     
 
 
@@ -979,8 +1028,8 @@ else{
                 </div>              
             </div>        
         </div>
-    </div>
-    <br><br><br> -->
+    </div> -->
+    <!-- <br><br><br> -->
     
 
 
@@ -1028,8 +1077,8 @@ else{
                 </div>              
             </div>        
         </div>
-    </div>
-    <br><br><br> -->
+    </div> -->
+    <!-- <br><br><br> -->
 
 
 
@@ -1053,7 +1102,7 @@ else{
         </div>
         <br><br><br>
     </div>
-    <br><br><br>
+    <!-- <br><br><br> -->
     <?php }?>
     <?php }?>
 
@@ -1062,14 +1111,14 @@ else{
         <div class="container-fluid footer">
             <div class="row" style="justify-content: space-around;">
                 <div class="col-sm-6 col-lg-3" align="left">
-                    <h4 class="display-4 name">CARnival Auto Deals</h4>
+                    <!-- <h4 class="display-4 name">CARnival Auto Deals</h4>
                     <p class="lead">
                         Welcome to CARnival Auto Deals, your premier destination for CARnival enthusiasts. 
                     Our passion is to offer a carefully curated selection of top-tier CARnival vehicles that will ignite your senses. 
                     From iconic classics that evoke nostalgia to cutting-edge performance machines that deliver heart-pounding excitement, 
                     we invite you to experience the essence of CARnival culture with us. Join the ride where horsepower meets passion, 
                     creating a symphony of excitement and entertainment in perfect harmony.
-                    </p>
+                    </p> -->
                 </div>
 
                 <div class="col-sm-6 col-lg-3" align="center">
